@@ -1,0 +1,10 @@
+{
+  "name": "proyectofootball-acceptance",
+  "private": true,
+  "scripts": {
+    "test:acceptance": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0"
+  }
+}

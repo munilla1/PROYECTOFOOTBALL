@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Crea tu cuenta de ProyectoFootball">
+  <title>Crear cuenta | ProyectoFootball</title>
+  <link rel="stylesheet" href="/styles/registro.css">
+</head>
+<body>
+  <main class="register-shell">
+    <section class="register-aside" aria-labelledby="welcome-title">
+      <div class="brand-mark">ProyectoFootball / 01</div>
+      <div class="aside-copy">
+        <h1 id="welcome-title">Tu próxima temporada empieza aquí.</h1>
+        <p>Construye tu carrera, sigue tu progreso y vuelve a la cancha con todo en su sitio.</p>
+      </div>
+      <div class="aside-note">Datos guardados. Partido a partido.</div>
+    </section>
+
+    <section class="register-panel" aria-labelledby="form-title">
+      <div class="form-frame">
+        <p class="form-kicker">Nueva cuenta</p>
+        <h2 id="form-title">Entra al vestuario</h2>
+        <p class="form-intro">Crea tu perfil para empezar a escribir tu historia en ProyectoFootball.</p>
+
+        <form id="register-form" novalidate>
+          <div class="field">
+            <label for="name">Nombre</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="Alex Morgan" required aria-describedby="name-error">
+            <p class="field-error" id="name-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="alex@ejemplo.com" required aria-describedby="email-error">
+            <p class="field-error" id="email-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="password">Contraseña</label>
+            <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres" required aria-describedby="password-help password-error">
+            <p class="field-error" id="password-help">Usa al menos 8 caracteres.</p>
+            <p class="field-error" id="password-error" role="alert"></p>
+          </div>
+
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          <button class="submit-button" id="submit-button" type="submit">
+            <span id="submit-label">Crear mi cuenta</span>
+          </button>
+        </form>
+
+        <p class="login-link">¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="/ui/registro.js"></script>
+</body>
+</html>
