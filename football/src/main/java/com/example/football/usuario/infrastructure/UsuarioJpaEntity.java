@@ -56,10 +56,10 @@ public class UsuarioJpaEntity {
     @Column(nullable = false)
     private EstadoJugador estadoJugador;
 
-    @Column(nullable = false, columnDefinition = "CLOB")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String estadisticasAcumuladas;
 
-    @Column(nullable = false, columnDefinition = "CLOB")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String historialPartidos;
 
     protected UsuarioJpaEntity() {
