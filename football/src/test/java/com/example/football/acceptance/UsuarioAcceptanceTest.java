@@ -26,14 +26,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
-@TestPropertySource(properties = {
-    "spring.datasource.url=jdbc:postgresql://localhost:5432/football_test",
-    "spring.datasource.username=postgres",
-    "spring.datasource.password=PostgreSQL17",
-    "spring.datasource.driver-class-name=org.postgresql.Driver",
-    "spring.jpa.hibernate.ddl-auto=create-drop"
-})
 class UsuarioAcceptanceTest {
     @Autowired
     private MockMvc mockMvc;

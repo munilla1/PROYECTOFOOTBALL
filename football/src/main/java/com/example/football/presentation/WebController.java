@@ -9,4 +9,9 @@ public class WebController {
     public String registro() {
         return "forward:/ui/registro.html";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "forward:/ui/login.html";
+    }
 }
