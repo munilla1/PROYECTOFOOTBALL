@@ -2,6 +2,7 @@ package com.example.football.usuario.presentation;
 
 import com.example.football.usuario.application.EmailDuplicadoException;
 import com.example.football.usuario.application.UsuarioNotFoundException;
+import com.example.football.sesiones.application.SesionException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,14 @@ public class ApiExceptionHandler {
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<ApiError> noAutorizado(UnauthorizedException exception) {
         return response(HttpStatus.UNAUTHORIZED, "sesion.no-autenticado", exception.getMessage());
+    }
+
+    @ExceptionHandler(SesionException.class)
+    public ResponseEntity<ApiError> sesion(SesionException exception) {
+        if ("sesion.datos-invalidos".equals(exception.code())) {
+            return response(HttpStatus.BAD_REQUEST, exception.code(), exception.getMessage());
+        }
+        return response(HttpStatus.UNAUTHORIZED, exception.code(), exception.getMessage());
     }
 
     @ExceptionHandler(ForbiddenException.class)
