@@ -1,181 +1,177 @@
-# CHG-0008 - Tareas técnicas del sistema de sesiones del usuario
+# CHG-0008 - Tareas del sistema de sesiones del usuario
 
 ## Estado
-`pendiente de aprobación de requirements.md`
+`pendiente de implementacion`
 
-## Regla de ejecución
+Estas tareas describen la implementacion prevista y no autorizan cambios de codigo hasta que el plan sea revisado conforme al flujo SDD.
 
-Estas tareas no deben implementarse hasta que `requirements.md` sea aprobado. La implementación debe respetar la separación entre dominio, aplicación, infraestructura y presentación definida por el Backend Agent. Antes de desarrollar la autenticación debe quedar documentada la estrategia de transporte, firma, expiración, revocación y persistencia de tokens.
+## Dependencias
+
+- CHG-0007: usuarios persistentes con email y contrasena protegida.
+- Contrato aprobado de login, logout, validacion de token, expiracion y errores.
+- Mecanismo seguro para comparar hashes de contrasena.
+- Mecanismo de tokens firmados o equivalente verificable.
+- Base de datos y configuracion de persistencia disponibles para sesiones.
+- Rutas protegidas que consumiran la identidad autenticada.
+
+## Convenciones de arquitectura
+
+- `domain/`: entidades, estados, reglas y errores puros del dominio de sesiones.
+- `application/`: casos de uso, puertos y orquestacion de autenticacion y ciclo de vida.
+- `infrastructure/`: adaptadores de persistencia, hash, tokens, reloj y configuracion externa.
+- `presentation/`: controladores HTTP, DTOs y traduccion de errores a respuestas.
+- `src/test/java/`: pruebas unitarias, de integracion y de aceptacion backend.
 
 ## Tareas
 
-### T-0801 - Confirmar el contrato de sesión y decisiones de seguridad
+### T-001 - Confirmar el contrato de sesiones
 
-- **Capa:** análisis / arquitectura
-- **Requisitos:** RF-0008-01, RF-0008-03, RF-0008-04, RF-0008-05, RF-0008-06, RNF-0008-02, RNF-0008-04, RNF-0008-05
-- **Descripción:** Definir el contrato HTTP de login, logout y rutas protegidas, junto con la estrategia de token, transporte, firma, claims, expiración, inactividad, revocación y almacenamiento de sesiones.
-- **Verificación:** Documentar método, rutas, cuerpos, respuestas, códigos de error, política de múltiples sesiones, atributos de cookie si aplica y configuración de tiempos. No continuar si el mecanismo elegido permite exponer tokens o impide la revocación requerida.
+- **Requisitos:** RF-001, RF-002, RF-004, RF-005, RF-006, RNF-002, RNF-004.
+- **Capa:** Presentacion / Aplicacion / Infraestructura.
+- **Trabajo:** Documentar metodo, rutas, JSON de entrada y salida, transporte del token, duracion, expiracion, logout y codigos de error.
+- **Verificacion:** registrar ejemplos de solicitudes y respuestas para login correcto, credenciales invalidas, usuario inexistente, token ausente, token invalido, token expirado y logout.
+- **Bloqueo:** no conectar controladores ni clientes hasta cerrar los campos obligatorios y los estados HTTP del contrato.
 
-### T-0802 - Definir entidades y objetos de valor del dominio Sesiones
+### T-002 - Definir la entidad y los estados de sesion
 
-- **Capa:** dominio
-- **Requisitos:** RF-0008-01, RF-0008-03, RF-0008-04, RF-0008-05, RNF-0008-04
-- **Descripción:** Crear la entidad o agregado `SesionUsuario` y los objetos de valor necesarios para identificador de sesión, identificador de usuario, estado, fechas, expiración, última actividad y referencia segura del token.
-- **Verificación:** Comprobar mediante reglas puras que una sesión válida requiere usuario, fechas coherentes, estado permitido y referencia no vacía; que una sesión cerrada o expirada no puede volver a estado activo sin una nueva creación.
+- **Requisitos:** RF-002, RF-003, RF-005, RF-006, RF-007, RNF-003.
+- **Capa:** Domain.
+- **Trabajo:** Crear la entidad de sesion con identidad de sesion, usuario, referencia segura del token, fecha de inicio, fecha de expiracion y estado activa/expirada/invalidada.
+- **Verificacion:** pruebas unitarias cubren invariantes, fechas coherentes, transiciones validas de estado, expiracion y cierre manual.
+- **Restriccion:** la entidad no debe depender de Spring, JPA, JWT ni otros adaptadores externos.
 
-### T-0803 - Implementar reglas de dominio de sesión y errores
+### T-003 - Definir errores y reglas del dominio
 
-- **Capa:** dominio
-- **Requisitos:** RF-0008-02, RF-0008-03, RF-0008-04, RF-0008-05, RNF-0008-05, RNF-0008-06
-- **Descripción:** Implementar las reglas puras para sesión activa, cierre idempotente, expiración por fecha o inactividad, rechazo de sesión invalidada y clasificación de errores `sesion.token-invalido`, `sesion.expirada`, `sesion.credenciales-invalidas` y `sesion.no-autenticado`.
-- **Verificación:** Verificar estados límite, doble logout, token expirado, sesión invalidada, actividad dentro de ventana y concurrencia sin reactivar sesiones cerradas.
+- **Requisitos:** RF-001, RF-004, RF-005, RF-006, RNF-001, RNF-004.
+- **Capa:** Domain.
+- **Trabajo:** Modelar `sesion.credenciales-invalidas`, `usuario.no-existe`, `sesion.no-autenticado`, `sesion.token-invalido` y `sesion.expirada`, junto con las reglas de autenticacion, expiracion y revocacion.
+- **Verificacion:** pruebas unitarias comprueban que cada regla produce el error de dominio correcto sin incluir credenciales, hashes ni tokens en sus mensajes.
 
-### T-0804 - Definir interfaces de repositorios de sesiones
+### T-004 - Definir puertos de aplicacion
 
-- **Capa:** dominio / aplicación
-- **Requisitos:** RF-0008-01, RF-0008-03, RF-0008-04, RF-0008-05, RNF-0008-03, RNF-0008-04
-- **Descripción:** Definir interfaces para crear sesiones, buscar por identificador o referencia de token, actualizar actividad y estado, invalidar sesiones y consultar sesiones activas del usuario sin exponer tecnología de persistencia.
-- **Verificación:** Comprobar que los casos de uso dependen únicamente de abstracciones y que las operaciones distinguen sesión inexistente, activa, expirada y cerrada sin devolver estados parciales.
+- **Requisitos:** RF-001 a RF-007, RNF-003, RNF-005.
+- **Capa:** Application.
+- **Trabajo:** Definir interfaces para buscar usuarios, comparar contrasenas, crear y consultar sesiones, emitir/verificar tokens y obtener el tiempo actual.
+- **Verificacion:** comprobar que los casos de uso dependen de interfaces y que no importan implementaciones JPA, JWT o clases concretas de infraestructura.
 
-### T-0805 - Diseñar el modelo persistente y restricciones de sesiones
+### T-005 - Implementar el caso de uso de inicio de sesion
 
-- **Capa:** infraestructura
-- **Requisitos:** RF-0008-01, RF-0008-04, RF-0008-05, RNF-0008-04, RNF-0008-06
-- **Descripción:** Crear el modelo JPA o migración equivalente para sesiones, con identificador estable, usuario asociado, referencia segura del token, fechas, estado, última actividad y restricciones de integridad e índices necesarios.
-- **Verificación:** Ejecutar el esquema en una base de datos de prueba y comprobar asociación válida con usuario, unicidad de referencias, estados permitidos, fechas obligatorias y ausencia de registros incompletos o duplicados.
+- **Requisitos:** RF-001, RF-002, RF-003, RF-007, RNF-001, RNF-005.
+- **Capa:** Application.
+- **Trabajo:** Orquestar la búsqueda por email, validación del hash, generación del token, creación de la sesión y devolución del resultado autenticado.
+- **Verificacion:** pruebas unitarias cubren login valido, email inexistente, contrasena incorrecta, campos ausentes, token no generado y dos sesiones independientes para el mismo usuario.
+- **Seguridad:** no registrar ni devolver la contrasena, su hash o el token en errores de aplicación.
 
-### T-0806 - Implementar el adaptador de persistencia de sesiones
+### T-006 - Implementar el caso de uso de validacion de sesion
 
-- **Capa:** infraestructura
-- **Requisitos:** RF-0008-03, RF-0008-04, RF-0008-05, RNF-0008-03, RNF-0008-04, RNF-0008-06
-- **Descripción:** Implementar el repositorio concreto que traduzca entre el dominio y el modelo persistente, gestione búsquedas, actualizaciones atómicas e invalidaciones, y convierta fallos de almacenamiento en errores controlados.
-- **Verificación:** Comprobar creación, consulta, actualización de actividad, cierre, expiración, persistencia tras reinicio y comportamiento ante conflicto o fallo de almacenamiento sin comunicar éxito parcial.
+- **Requisitos:** RF-004, RF-005, RNF-002, RNF-005.
+- **Capa:** Application.
+- **Trabajo:** Validar la firma o integridad del token, localizar la sesión, comprobar estado y expiracion, y devolver la identidad autenticada.
+- **Verificacion:** pruebas unitarias cubren token valido, ausente, mal formado, manipulado, expirado, invalidado y asociado a una sesion inexistente.
 
-### T-0807 - Implementar el servicio de verificación de credenciales
+### T-007 - Implementar el caso de uso de cierre de sesion
 
-- **Capa:** aplicación / infraestructura
-- **Requisitos:** RF-0008-01, RF-0008-02, RNF-0008-01, RNF-0008-05
-- **Descripción:** Integrar el repositorio de usuarios de CHG-0007 y el `PasswordHasher` existente para buscar por email y comparar la contraseña recibida únicamente contra el hash persistido.
-- **Verificación:** Comprobar credencial correcta, contraseña incorrecta, email inexistente, datos inválidos y respuesta uniforme sin revelar si el usuario existe ni exponer contraseña o hash en logs y respuestas.
+- **Requisitos:** RF-006, RF-007, RNF-005.
+- **Capa:** Application.
+- **Trabajo:** Invalidar la sesión asociada al token autenticado sin afectar otras sesiones activas del mismo usuario.
+- **Verificacion:** pruebas unitarias cubren logout valido, logout repetido, logout sin autenticacion y preservacion de una segunda sesión activa.
 
-### T-0808 - Implementar el adaptador de firma y validación de tokens
+### T-008 - Crear el adaptador de comparacion de contrasenas
 
-- **Capa:** infraestructura
-- **Requisitos:** RF-0008-03, RF-0008-05, RNF-0008-02, RNF-0008-03, RNF-0008-05
-- **Descripción:** Implementar el adaptador JWT o equivalente aprobado para generar y validar tokens firmados, con claims mínimas de identidad, emisión y expiración, sin colocar reglas HTTP ni de negocio en el adaptador.
-- **Verificación:** Comprobar unicidad y firma, token alterado, algoritmo o clave inválidos, expiración, claims ausentes, ausencia de secretos en respuestas y que la validación devuelva solo una identidad controlada.
+- **Requisitos:** RF-001, RNF-001, RNF-003.
+- **Capa:** Infrastructure.
+- **Trabajo:** Conectar el puerto de comparación de contrasenas con el mecanismo de hash aprobado por CHG-0007, sin almacenar contrasenas en texto plano.
+- **Verificacion:** pruebas de integracion comprueban que una contrasena valida coincide, una incorrecta no coincide y el adaptador no expone el hash en logs o respuestas.
 
-### T-0809 - Implementar el caso de uso de inicio de sesión
+### T-009 - Crear el adaptador de tokens
 
-- **Capa:** aplicación
-- **Requisitos:** RF-0008-01, RF-0008-02, RF-0008-03, RNF-0008-01, RNF-0008-02, RNF-0008-04, RNF-0008-06
-- **Descripción:** Orquestar validación de entrada, comprobación de credenciales, creación de sesión, generación de token, persistencia atómica y construcción de una respuesta segura.
-- **Verificación:** Comprobar login válido, contraseña incorrecta, usuario inexistente, entrada inválida, múltiples sesiones, fallo de repositorio o firma y ausencia de sesión o token parcial cuando la operación falla.
+- **Requisitos:** RF-002, RF-004, RF-005, RF-007, RNF-002, RNF-003.
+- **Capa:** Infrastructure.
+- **Trabajo:** Implementar la emisión, firma, verificación y extracción segura de identidad y expiracion mediante JWT o mecanismo equivalente aprobado.
+- **Verificacion:** pruebas de integracion cubren tokens únicos, firma válida, token manipulado, expiracion, ausencia de credenciales sensibles y configuración de duración.
+- **Seguridad:** la clave o secreto debe proceder de configuración segura y no quedar hardcodeado ni aparecer en logs.
 
-### T-0810 - Implementar el caso de uso de cierre de sesión
+### T-010 - Crear la persistencia de sesiones
 
-- **Capa:** aplicación
-- **Requisitos:** RF-0008-04, RF-0008-03, RNF-0008-04, RNF-0008-06
-- **Descripción:** Orquestar la resolución de la sesión autenticada, su invalidación y la limpieza del mecanismo de transporte definido, manteniendo el cierre idempotente.
-- **Verificación:** Comprobar logout válido, sesión ya cerrada, token inválido, conservación de otras sesiones del usuario y rechazo posterior del token cerrado en rutas protegidas.
+- **Requisitos:** RF-003, RF-005, RF-006, RF-007, RNF-003, RNF-005.
+- **Capa:** Infrastructure.
+- **Trabajo:** Crear entidad JPA, repositorio y adaptador para guardar, consultar, expirar e invalidar sesiones sin acoplar el dominio a JPA.
+- **Verificacion:** pruebas de integracion cubren alta, consulta por referencia de token o identificador, cambio de estado, expiracion, sesiones múltiples y consistencia transaccional.
+- **Seguridad:** persistir solo la referencia necesaria del token o un identificador seguro según el contrato; no guardar credenciales.
 
-### T-0811 - Implementar el caso de uso de validación y expiración
+### T-011 - Implementar el controlador HTTP de login
 
-- **Capa:** aplicación
-- **Requisitos:** RF-0008-03, RF-0008-05, RF-0008-06, RNF-0008-04, RNF-0008-05, RNF-0008-06
-- **Descripción:** Validar token y sesión persistida, aplicar expiración por fecha o inactividad, actualizar última actividad según la política aprobada y devolver únicamente la identidad autenticada.
-- **Verificación:** Comprobar sesión activa, token manipulado, sesión cerrada, expiración temporal, inactividad, concurrencia y que una sesión expirada no pueda reactivarse automáticamente.
+- **Requisitos:** RF-001, RF-002, RF-003, RNF-001, RNF-004.
+- **Capa:** Presentation.
+- **Trabajo:** Exponer `POST /api/sesiones/login`, recibir email y password en JSON, delegar al caso de uso y devolver `{ "token": "..." }` en caso de éxito.
+- **Verificacion:** pruebas MVC comprueban método, ruta, JSON, estado de éxito, token no vacío y ausencia de lógica de autenticación en el controlador.
+- **Restriccion:** el controlador no debe acceder directamente a repositorios, comparar hashes ni generar tokens.
 
-### T-0812 - Implementar el middleware de autenticación
+### T-012 - Implementar el controlador HTTP de logout y validacion
 
-- **Capa:** presentación / infraestructura
-- **Requisitos:** RF-0008-03, RF-0008-06, RNF-0008-03, RNF-0008-05, RNF-0008-06
-- **Descripción:** Crear un filtro, interceptor o mecanismo equivalente que extraiga el token del transporte aprobado, delegue su validación al caso de uso y coloque la identidad autenticada en el contexto de la petición.
-- **Verificación:** Comprobar ruta pública sin token, ruta protegida sin token, token mal formado, token expirado, token revocado y token válido; confirmar que el controlador no interpreta directamente JWT ni ejecuta el caso de uso con identidad no validada.
+- **Requisitos:** RF-004, RF-005, RF-006, RF-007, RNF-004, RNF-005.
+- **Capa:** Presentation.
+- **Trabajo:** Exponer los endpoints definidos para cerrar sesión y, si corresponde al contrato, validar o resolver la identidad en solicitudes protegidas mediante el contexto de seguridad.
+- **Verificacion:** pruebas MVC comprueban logout autenticado, ausencia de autenticación, token expirado, token invalidado y preservación de sesiones ajenas.
 
-### T-0813 - Implementar los controladores HTTP de sesiones
+### T-013 - Implementar el middleware de autenticacion
 
-- **Capa:** presentación
-- **Requisitos:** RF-0008-01, RF-0008-02, RF-0008-04, RF-0008-06, RNF-0008-03, RNF-0008-05
-- **Descripción:** Exponer `POST /api/sesiones/login` y `POST /api/sesiones/logout`, mapear entrada y salida, aplicar códigos HTTP y traducir errores de dominio a respuestas estables sin filtrar detalles internos.
-- **Verificación:** Comprobar contratos de éxito, `401` para credenciales inválidas, `400` para datos inválidos, logout idempotente, ausencia de credenciales en respuestas y compatibilidad con la identidad entregada por el middleware.
+- **Requisitos:** RF-004, RF-005, RNF-002, RNF-003, RNF-004.
+- **Capa:** Presentation / Infrastructure.
+- **Trabajo:** Extraer el token de la cabecera definida, delegar su verificación al caso de uso, establecer la identidad autenticada y bloquear solicitudes no válidas antes del controlador protegido.
+- **Verificacion:** pruebas de integración cubren token válido, ausente, mal formado, manipulado, expirado y sesión invalidada; las respuestas utilizan los códigos de dominio definidos.
+- **Restriccion:** no duplicar reglas de expiración o validación dentro del filtro.
 
-### T-0814 - Configurar transporte seguro y ciclo de vida
+### T-014 - Configurar manejo seguro de errores HTTP
 
-- **Capa:** infraestructura / presentación
-- **Requisitos:** RF-0008-04, RF-0008-05, RF-0008-06, RNF-0008-02, RNF-0008-04
-- **Descripción:** Configurar el transporte de sesión elegido, las claves o secretos desde configuración segura, expiración, inactividad, invalidación y atributos de cookie `HttpOnly`, `Secure` y `SameSite` cuando corresponda.
-- **Verificación:** Revisar configuración por entorno, comprobar que los secretos no están en el repositorio, que producción exige HTTPS, que logout elimina o invalida el transporte y que la expiración se aplica de forma uniforme.
+- **Requisitos:** RF-001, RF-004, RF-005, RF-006, RNF-001, RNF-004, RNF-005.
+- **Capa:** Presentation.
+- **Trabajo:** Traducir errores de dominio y fallos técnicos a estados HTTP y cuerpos JSON estables, sin filtrar detalles internos ni diferenciar información sensible indebidamente.
+- **Verificacion:** pruebas MVC cubren credenciales inválidas, usuario inexistente, token inválido, sesión expirada, no autenticado, validación de entrada y almacenamiento no disponible.
 
-### T-0815 - Aplicar control de observabilidad y privacidad
+### T-015 - Configurar expiracion, reloj y secretos
 
-- **Capa:** aplicación / infraestructura / presentación
-- **Requisitos:** RF-0008-02, RNF-0008-01, RNF-0008-02, RNF-0008-05
-- **Descripción:** Revisar logs, excepciones, respuestas y métricas para impedir la exposición de contraseñas, hashes, tokens completos, SQL, stack traces o configuración interna.
-- **Verificación:** Ejecutar flujos de éxito y error inspeccionando respuestas y logs; confirmar redacción o exclusión de secretos y mensajes genéricos para errores de infraestructura.
+- **Requisitos:** RF-005, RNF-001, RNF-002, RNF-005.
+- **Capa:** Infrastructure.
+- **Trabajo:** Externalizar duración de tokens, reloj, claves o secretos y parámetros de almacenamiento; definir valores seguros por entorno.
+- **Verificacion:** pruebas con reloj controlado comprueban expiración determinista; validación de configuración impide arrancar con secretos ausentes o inseguros en entornos protegidos.
 
-### T-0816 - Implementar pruebas unitarias y de integración
+### T-016 - Añadir pruebas de unidad, integracion y aceptacion
 
-- **Capa:** pruebas unitarias / integración
-- **Requisitos:** Todos los RF y RNF aplicables
-- **Descripción:** Crear pruebas para reglas de dominio, casos de uso, repositorio, firma de tokens, configuración de expiración, mapeo de errores y middleware con base de datos de prueba.
-- **Verificación:** Cubrir credenciales válidas e inválidas, tokens alterados o expirados, logout, revocación, múltiples sesiones, rutas públicas/protegidas, fallos de persistencia, concurrencia y ausencia de secretos.
+- **Requisitos:** RF-001 a RF-007, RNF-001 a RNF-005.
+- **Capa:** Pruebas.
+- **Trabajo:** Crear pruebas del dominio, casos de uso, adaptadores, controladores, middleware y flujo completo de login/logout con persistencia de sesiones.
+- **Verificacion:** cubrir todos los criterios de aceptación, sesiones múltiples, concurrencia, expiración, errores de infraestructura y ausencia de datos sensibles en respuestas y logs verificables.
 
-### T-0817 - Implementar pruebas de aceptación del sistema de sesiones
+### T-017 - Ejecutar validacion y preparar evidencia
 
-- **Capa:** pruebas de aceptación
-- **Requisitos:** Todos los RF y RNF aplicables
-- **Descripción:** Implementar escenarios de aceptación HTTP del ciclo completo de sesiones, desde login hasta logout, incluyendo validación de rutas protegidas y expiración.
-- **Verificación:** Ejecutar escenarios de iniciar sesión correctamente, credenciales inválidas, usuario inexistente, acceso sin sesión, token válido, token manipulado, token expirado, logout, revocación y persistencia según el mecanismo elegido; registrar cada resultado en `evidence.md`.
+- **Requisitos:** Todos.
+- **Capa:** Verificación SDD.
+- **Trabajo:** Ejecutar pruebas unitarias, integración y aceptación, compilación, análisis estático y comprobaciones de seguridad; documentar resultados y contratos en `evidence.md`.
+- **Verificacion:** no quedan errores introducidos por CHG-0008, cada requisito tiene evidencia ejecutada y las limitaciones o dependencias pendientes quedan registradas.
 
-### T-0818 - Verificar regresión, seguridad y contrato frontend
+## Orden recomendado de ejecucion
 
-- **Capa:** integración / calidad
-- **Requisitos:** RF-0008-01, RF-0008-03, RF-0008-04, RF-0008-05, RF-0008-06, RNF-0008-01, RNF-0008-02, RNF-0008-03, RNF-0008-04, RNF-0008-05, RNF-0008-06
-- **Descripción:** Ejecutar la suite existente de CHG-0007, comprobar que los endpoints protegidos siguen recibiendo `Principal` o identidad equivalente, validar el contrato consumible por CHG-0102 y revisar configuración de secretos y cookies.
-- **Verificación:** Confirmar compilación, pruebas completas sin regresiones, contrato HTTP documentado, respuestas seguras, rutas protegidas operativas y evidencia actualizada con pendientes explícitos.
+1. T-001.
+2. T-002 y T-003.
+3. T-004.
+4. T-005, T-006 y T-007.
+5. T-008, T-009 y T-010.
+6. T-011, T-012 y T-013.
+7. T-014 y T-015.
+8. T-016.
+9. T-017.
 
-## Orden recomendado
+## Criterio de completitud
 
-1. T-0801 - Confirmar el contrato de sesión y decisiones de seguridad.
-2. T-0802 - Definir entidades y objetos de valor del dominio Sesiones.
-3. T-0803 - Implementar reglas de dominio y errores.
-4. T-0804 - Definir interfaces de repositorios.
-5. T-0805 - Diseñar el modelo persistente y restricciones.
-6. T-0806 - Implementar el adaptador de persistencia.
-7. T-0807 - Implementar el servicio de verificación de credenciales.
-8. T-0808 - Implementar el adaptador de firma y validación de tokens.
-9. T-0809 - Implementar el caso de uso de inicio de sesión.
-10. T-0810 - Implementar el caso de uso de cierre de sesión.
-11. T-0811 - Implementar el caso de uso de validación y expiración.
-12. T-0812 - Implementar el middleware de autenticación.
-13. T-0813 - Implementar los controladores HTTP de sesiones.
-14. T-0814 - Configurar transporte seguro y ciclo de vida.
-15. T-0815 - Aplicar control de observabilidad y privacidad.
-16. T-0816 - Implementar pruebas unitarias y de integración.
-17. T-0817 - Implementar pruebas de aceptación.
-18. T-0818 - Verificar regresión, seguridad y contrato frontend.
+CHG-0008 se considerara listo cuando el flujo de login emita sesiones persistentes y tokens seguros, las rutas protegidas validen identidad y expiracion, logout invalide solo la sesion solicitada, los errores mantengan el contrato definido, las credenciales y tokens no se expongan, y toda la cobertura quede registrada en `evidence.md`.
 
-## Dependencias externas
+## Fuera de alcance tecnico
 
-- **CHG-0007:** entidad `Usuario`, repositorio de usuarios, email persistido y `PasswordHasher`/hash BCrypt.
-- **CHG-0102:** consumo del endpoint de login y del mecanismo de sesión.
-- **CHG-0103:** rutas protegidas y destino posterior al login.
-- **Configuración de despliegue:** claves, secretos, HTTPS, tiempos de expiración y atributos de cookie.
-
-## Trazabilidad resumida
-
-| Requisito | Tareas |
-|---|---|
-| RF-0008-01 | T-0801, T-0802, T-0804, T-0805, T-0806, T-0807, T-0808, T-0809, T-0813, T-0816, T-0817, T-0818 |
-| RF-0008-02 | T-0801, T-0803, T-0807, T-0809, T-0813, T-0815, T-0816, T-0817, T-0818 |
-| RF-0008-03 | T-0801, T-0802, T-0803, T-0804, T-0806, T-0808, T-0809, T-0811, T-0812, T-0816, T-0817, T-0818 |
-| RF-0008-04 | T-0801, T-0802, T-0803, T-0804, T-0805, T-0806, T-0810, T-0812, T-0813, T-0814, T-0816, T-0817, T-0818 |
-| RF-0008-05 | T-0801, T-0802, T-0803, T-0804, T-0805, T-0806, T-0808, T-0811, T-0812, T-0814, T-0816, T-0817, T-0818 |
-| RF-0008-06 | T-0801, T-0803, T-0804, T-0811, T-0812, T-0813, T-0814, T-0816, T-0817, T-0818 |
-| RNF-0008-01 | T-0807, T-0809, T-0813, T-0815, T-0816, T-0817, T-0818 |
-| RNF-0008-02 | T-0801, T-0808, T-0809, T-0811, T-0814, T-0815, T-0816, T-0817, T-0818 |
-| RNF-0008-03 | T-0802, T-0803, T-0804, T-0806, T-0808, T-0809, T-0810, T-0811, T-0812, T-0813, T-0816, T-0818 |
-| RNF-0008-04 | T-0801, T-0802, T-0804, T-0805, T-0806, T-0809, T-0810, T-0811, T-0814, T-0816, T-0817, T-0818 |
-| RNF-0008-05 | T-0801, T-0803, T-0807, T-0808, T-0811, T-0812, T-0813, T-0815, T-0816, T-0817, T-0818 |
-| RNF-0008-06 | T-0801, T-0803, T-0805, T-0806, T-0809, T-0810, T-0811, T-0812, T-0814, T-0816, T-0817, T-0818 |
+- Autenticacion social.
+- Recuperacion o cambio de contrasena.
+- Autenticacion multifactor.
+- Gestion de roles y permisos de CHG-0009.
+- Registro de usuarios de CHG-0007.
+- Pantallas frontend de CHG-0101 y CHG-0102.
+- Integracion con Stripe o pagos.

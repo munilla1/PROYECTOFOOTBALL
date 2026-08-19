@@ -77,7 +77,6 @@ public class SesionAuthenticationFilter extends OncePerRequestFilter {
     private boolean isPublic(HttpServletRequest request) {
         String path = request.getRequestURI().substring(request.getContextPath().length());
         return "/api/sesiones/login".equals(path)
-                || "/api/sesiones/logout".equals(path)   // 🔥 vuelve a poner esto
                 || ("POST".equals(request.getMethod()) && "/api/usuarios".equals(path))
                 || !path.startsWith("/api/");
     }

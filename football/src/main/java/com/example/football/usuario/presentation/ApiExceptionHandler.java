@@ -33,6 +33,9 @@ public class ApiExceptionHandler {
         if ("sesion.datos-invalidos".equals(exception.code())) {
             return response(HttpStatus.BAD_REQUEST, exception.code(), exception.getMessage());
         }
+        if ("usuario.no-existe".equals(exception.code())) {
+            return response(HttpStatus.NOT_FOUND, exception.code(), exception.getMessage());
+        }
         return response(HttpStatus.UNAUTHORIZED, exception.code(), exception.getMessage());
     }
 
