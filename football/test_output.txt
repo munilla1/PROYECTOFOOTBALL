@@ -1,0 +1,37 @@
+[WebServer] Picked up JAVA_TOOL_OPTIONS: -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8
+
+
+Running 10 tests using 1 worker
+
+[1/10] [chromium] › src\test\acceptance-frontend\panel.spec.js:52:7 › CHG-0103 - Panel de usuario › redirige al login cuando no existe una sesion local
+[2/10] [chromium] › src\test\acceptance-frontend\panel.spec.js:59:7 › CHG-0103 - Panel de usuario › carga el perfil con el contrato protegido y muestra sus datos
+[3/10] [chromium] › src\test\acceptance-frontend\panel.spec.js:81:7 › CHG-0103 - Panel de usuario › muestra valores neutros para datos opcionales ausentes
+[4/10] [chromium] › src\test\acceptance-frontend\panel.spec.js:96:7 › CHG-0103 - Panel de usuario › comunica la carga, conserva el error recuperable y permite reintentar
+[5/10] [chromium] › src\test\acceptance-frontend\panel.spec.js:124:7 › CHG-0103 - Panel de usuario › limpia la sesion y vuelve al login cuando el backend rechaza el token
+[6/10] [chromium] › src\test\acceptance-frontend\panel.spec.js:137:7 › CHG-0103 - Panel de usuario › ofrece Checkout para membresia inactiva y redirige con una peticion protegida
+[7/10] [chromium] › src\test\acceptance-frontend\panel.spec.js:162:7 › CHG-0103 - Panel de usuario › muestra un error recuperable de Checkout sin perder el perfil
+[8/10] [chromium] › src\test\acceptance-frontend\panel.spec.js:173:7 › CHG-0103 - Panel de usuario › expone los cuatro accesos del juego con sus rutas definidas
+[9/10] [chromium] › src\test\acceptance-frontend\panel.spec.js:193:7 › CHG-0103 - Panel de usuario › cierra la sesion, limpia el estado local y bloquea el acceso posterior
+  1) [chromium] › src\test\acceptance-frontend\panel.spec.js:193:7 › CHG-0103 - Panel de usuario › cierra la sesion, limpia el estado local y bloquea el acceso posterior 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+      199 |     await page.getByRole('button', { name: 'Cerrar sesion' }).click();
+      200 |     await expect(page).toHaveURL(/\/login$/);
+    > 201 |     expect(await page.evaluate(() => sessionStorage.length)).toBe(0);
+          |                                                              ^
+      202 |
+      203 |     await page.reload();
+      204 |     await expect(page).toHaveURL(/\/login$/);
+        at c:\Users\mucho\Desktop\ProyectoFootball\football\src\test\acceptance-frontend\panel.spec.js:201:62
+
+    Error Context: test-results\panel-CHG-0103---Panel-de--e4ca8-bloquea-el-acceso-posterior-chromium\error-context.md
+
+
+[10/10] [chromium] › src\test\acceptance-frontend\panel.spec.js:207:7 › CHG-0103 - Panel de usuario › mantiene accesibilidad y usabilidad en movil
+  1 failed
+    [chromium] › src\test\acceptance-frontend\panel.spec.js:193:7 › CHG-0103 - Panel de usuario › cierra la sesion, limpia el estado local y bloquea el acceso posterior 
+  9 passed (20.7s)

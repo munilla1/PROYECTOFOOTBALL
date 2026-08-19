@@ -14,4 +14,9 @@ public class WebController {
     public String login() {
         return "forward:/ui/login.html";
     }
+    
+    @GetMapping("/panel")
+    public String panel() {
+        return "forward:/ui/panel.html";
+    }
 }

@@ -25,7 +25,7 @@
         <h2 id="form-title">Inicia sesion</h2>
         <p class="form-intro">Introduce tus credenciales para continuar.</p>
 
-        <form id="login-form" novalidate>
+        <form id="login-form" onsubmit="return false;" novalidate>
           <div class="field">
             <label for="email">Email</label>
             <input id="email" name="email" type="email" autocomplete="email" placeholder="alex@ejemplo.com" required aria-describedby="email-error">
