@@ -60,8 +60,10 @@ Object.entries(fields).forEach(([key, field]) => {
   });
 });
 
+// ⭐ AQUÍ ESTÁ LA INTEGRACIÓN CORRECTA
 form.addEventListener('submit', async (event) => {
-  event.preventDefault();
+  event.preventDefault(); // evita el submit automático del navegador
+
   if (state.status === 'loading' || !validate()) {
     fields[Object.keys(state.errors)[0]]?.focus();
     return;

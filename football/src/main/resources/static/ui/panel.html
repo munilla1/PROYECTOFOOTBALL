@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Panel de usuario de ProyectoFootball">
+  <title>Panel | ProyectoFootball</title>
+  <link rel="stylesheet" href="/styles/panel.css">
+</head>
+<body>
+  <main class="dashboard-shell">
+    <header class="dashboard-header">
+      <a class="brand-mark" href="/panel">ProyectoFootball / 03</a>
+      <button class="logout-button" id="logout-button" type="button">Cerrar sesion</button>
+    </header>
+
+    <section class="dashboard-intro" aria-labelledby="dashboard-title">
+      <p class="eyebrow">Tu vestuario</p>
+      <h1 id="dashboard-title">Tu temporada, de un vistazo.</h1>
+      <p>Consulta tu perfil y vuelve rapido a las partes importantes del juego.</p>
+    </section>
+
+    <div class="panel-status" id="panel-status" role="status" aria-live="polite"></div>
+
+    <section class="profile-grid" id="profile-content" aria-label="Resumen del jugador" hidden>
+      <article class="profile-card profile-card-primary">
+        <p class="card-kicker">Jugador</p>
+        <h2 id="user-name">No disponible</h2>
+        <p id="user-email">No disponible</p>
+        <div class="player-stats" aria-label="Progreso del jugador">
+          <div><strong id="user-level">-</strong><span>Nivel</span></div>
+          <div><strong id="user-xp">-</strong><span>XP</span></div>
+          <div><strong id="user-energy">-</strong><span>Energia</span></div>
+        </div>
+        <p class="player-state">Estado: <strong id="player-status">No disponible</strong></p>
+      </article>
+
+      <article class="profile-card membership-card">
+        <p class="card-kicker">Membresia</p>
+        <h2 id="membership-name">No disponible</h2>
+        <p id="membership-status">Consulta tu estado actual.</p>
+        <button class="action-button" id="checkout-button" type="button" hidden>
+          <span id="checkout-label">Activar membresia</span>
+        </button>
+        <p class="card-status" id="checkout-status" role="status" aria-live="polite"></p>
+      </article>
+    </section>
+
+    <section class="quick-actions" aria-labelledby="actions-title">
+      <div class="section-heading">
+        <p class="eyebrow">Siguiente jugada</p>
+        <h2 id="actions-title">Accesos del juego</h2>
+      </div>
+      <nav class="action-grid" aria-label="Funcionalidades del juego">
+        <a href="/estadisticas" class="action-link"><span>01</span><strong>Estadisticas reales</strong><small>Rendimiento partido a partido</small></a>
+        <a href="/jornadas" class="action-link"><span>02</span><strong>Jornadas</strong><small>Lo que viene en el calendario</small></a>
+        <a href="/fichajes" class="action-link"><span>03</span><strong>Fichajes</strong><small>Refuerza tu equipo</small></a>
+        <a href="/progresion" class="action-link"><span>04</span><strong>Progresion</strong><small>Haz crecer tu carrera</small></a>
+      </nav>
+    </section>
+
+    <button class="retry-button" id="retry-button" type="button" hidden>Reintentar carga</button>
+  </main>
+  <script type="module" src="/ui/panel.js"></script>
+</body>
+</html>
