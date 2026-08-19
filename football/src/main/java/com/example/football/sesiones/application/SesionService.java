@@ -47,10 +47,17 @@ public class SesionService {
             throw new SesionException("sesion.datos-invalidos", "El email y la contraseña son obligatorios");
         }
 
+        if (!email.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")) {
+            throw new SesionException("sesion.datos-invalidos", "El email no es valido");
+        }
+
         Optional<Usuario> usuario = usuarioRepository.findByEmail(email.trim().toLowerCase());
 
-        // 🔴 CORRECCIÓN 2: credenciales inválidas → 401 sesion.credenciales-invalidas
-        if (usuario.isEmpty() || !passwordHasher.matches(password, usuario.get().passwordHash())) {
+        if (usuario.isEmpty()) {
+            throw new SesionException("usuario.no-existe", "El usuario no existe");
+        }
+
+        if (!passwordHasher.matches(password, usuario.get().passwordHash())) {
             throw new SesionException("sesion.credenciales-invalidas", "Las credenciales no son validas");
         }
 

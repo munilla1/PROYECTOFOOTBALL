@@ -1,93 +1,103 @@
-# CHG‑0008 — Evidencia de validación
+# CHG-0008 - Evidencia de validacion
 
-## Estado  
-`validado`
+## Estado
+`validacion parcial`
 
-El ciclo de sesiones queda completamente implementado y validado. Se han corregido los dos fallos detectados en la validación parcial anterior:  
-- La expiración por inactividad ahora se persiste correctamente como `EXPIRADA`.  
-- Los datos de login inválidos devuelven `400 sesion.datos-invalidos` en lugar de `401`.
+El flujo principal de sesiones esta implementado y validado mediante la suite de aceptacion backend. La validacion global del proyecto y algunos escenarios no ejercitados de forma dedicada permanecen pendientes.
 
-No ha sido necesario modificar el filtro de autenticación ni ningún controlador.
+## Fecha de validacion
 
----
+2026-08-19
 
-## Fecha de validación  
-2026‑08‑18
+## Implementacion validada
 
----
-
-## Implementación validada
-
-### Correcciones aplicadas
-- **Persistencia de expiración por inactividad**  
-  En `SesionService.autenticar`, la sesión se marca como `EXPIRADA` y se persiste antes de lanzar `SesionException`, evitando el rollback transaccional y cumpliendo RNF‑0008‑04.
-
-- **Datos de login inválidos → 400**  
-  En `ApiExceptionHandler`, el código `sesion.datos-invalidos` se mapea correctamente a `400 Bad Request`, mientras que el resto de errores de sesión mantienen `401 Unauthorized`, cumpliendo RF‑0008‑02 y RNF‑0008‑05.
-
-### Comportamiento final validado
-- Login seguro sin exponer credenciales.  
-- Rechazo correcto de credenciales inválidas.  
-- Validación de datos vacíos con `400`.  
-- Protección de rutas autenticadas.  
-- Logout idempotente.  
-- Expiración por inactividad persistida y no reactivada.  
-- Exposición correcta de identidad autenticada.  
-- Sesiones múltiples por usuario.  
-- Tokens firmados y verificados correctamente.
-
----
+- Inicio de sesion mediante `POST /api/sesiones/login`.
+- Validacion de campos obligatorios y formato de email.
+- Diferenciacion entre usuario inexistente y credenciales invalidas.
+- Hash de contrasenas mediante BCrypt.
+- Emision de tokens firmados HMAC-SHA256 con identificacion de usuario y expiracion.
+- Persistencia de sesiones con hash SHA-256 del token.
+- Cookie `football_session` HttpOnly, Secure y SameSite=Lax.
+- Middleware para proteger rutas `/api` y establecer la identidad autenticada.
+- Rechazo de tokens ausentes, manipulados, expirados o invalidados.
+- Expiracion por inactividad y actualizacion del estado de la sesion.
+- Logout autenticado con invalidacion de una unica sesion.
+- Soporte de varias sesiones activas para el mismo usuario.
+- Respuestas HTTP JSON con codigos de dominio sin exponer contrasenas, hashes ni tokens en errores.
+- Separacion entre dominio, aplicacion, infraestructura y presentacion.
 
 ## Pruebas ejecutadas
 
-### SesionAcceptanceTest  
-**Resultado:** `6/6 correctos`
+### Suite de aceptacion backend
 
-Escenarios validados:
-- Login correcto  
-- Rechazo de credenciales inválidas  
-- Rechazo de datos vacíos con `400`  
-- Protección de rutas  
-- Logout idempotente  
-- Expiración por inactividad persistida como `EXPIRADA`
+**Comando:**
 
-### UsuarioAcceptanceTest  
-**Resultado:** `7/7 correctos`
+```text
+mvnw.cmd -q -Dtest=SesionAcceptanceTest test
+```
 
-Escenarios validados:
-- Recuperación de progreso  
-- Actualización parcial  
-- Rechazo de progreso inválido  
-- Acceso prohibido a progreso de otro usuario  
-- Usuario no encontrado  
-- Sesión requerida  
-- Integridad de datos
+**Resultado:**
 
----
+```text
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+```
+
+### Escenarios validados
+
+| Escenario | Resultado | Requisitos |
+|---|---|---|
+| Iniciar sesion con credenciales validas y crear varias sesiones | aprobado | RF-001, RF-002, RF-003, RF-007 |
+| No exponer contrasena ni `passwordHash` en el login | aprobado | RF-002, RF-003, RNF-001 |
+| Rechazar credenciales invalidas y usuario inexistente sin crear sesiones | aprobado | RF-001, RF-003, RNF-004, RNF-005 |
+| Rechazar email invalido y campos ausentes | aprobado | RF-001, RNF-004 |
+| Rechazar datos de login vacios | aprobado | RF-001, RNF-004, RNF-005 |
+| Proteger rutas y exponer solo la identidad autenticada | aprobado | RF-004, RNF-002, RNF-004 |
+| Cerrar una sesion, rechazar su reutilizacion y conservar otra sesion activa | aprobado | RF-006, RF-007, RNF-002, RNF-005 |
+| Rechazar logout sin sesion autenticada | aprobado | RF-006, RNF-004 |
+| Expirar una sesion por inactividad y no reactivarla | aprobado | RF-005, RNF-002, RNF-005 |
+
+Nota: la tabla recoge nueve comprobaciones funcionales distribuidas en ocho metodos de prueba; el primer escenario tambien verifica la cookie segura y la unicidad de tokens.
+
+### Compilacion
+
+**Comando:**
+
+```text
+mvnw.cmd -DskipTests compile
+```
+
+**Resultado:** `BUILD SUCCESS`
+
+### Diagnosticos
+
+El analisis de errores Java no reporta errores en los archivos modificados de CHG-0008.
 
 ## Cobertura de requisitos
 
 | Requisito | Estado | Evidencia |
-|----------|--------|-----------|
-| **RF‑0008‑01** — Login con credenciales válidas | validado | Sesión creada, token emitido, cookie segura |
-| **RF‑0008‑02** — Rechazar credenciales no válidas | validado | `401 sesion.credenciales-invalidas` |
-| **RF‑0008‑02** — Validación de datos vacíos | validado | `400 sesion.datos-invalidos` |
-| **RF‑0008‑03** — Validación de tokens | validado | Token ausente, inválido y válido cubiertos |
-| **RF‑0008‑04** — Logout | validado | Idempotente, revoca solo la sesión cerrada |
-| **RF‑0008‑05** — Expirar sesiones | validado | Estado persistido como `EXPIRADA` |
-| **RF‑0008‑06** — Proteger rutas | validado | Acceso permitido solo con sesión activa |
-| **RNF‑0008‑01** — Seguridad de credenciales | validado | No se exponen hashes ni contraseñas |
-| **RNF‑0008‑02** — Seguridad de tokens | validado | Cookie `HttpOnly`, `Secure`, `SameSite=Lax` |
-| **RNF‑0008‑04** — Persistencia e integridad | validado | Expiración persistida correctamente |
-| **RNF‑0008‑05** — Trazabilidad y errores | validado | Códigos de error correctos y consistentes |
+|---|---|---|
+| RF-001 - Iniciar sesion con credenciales | validado | Login correcto, campos obligatorios, formato de email, credenciales invalidas y usuario inexistente |
+| RF-002 - Emitir token de sesion | validado | Token no vacio, expiracion, identidad, unicidad y ausencia de credenciales sensibles |
+| RF-003 - Persistir y registrar la sesion | validado | Dos sesiones persistidas, estados y fechas gestionados por la capa de sesiones |
+| RF-004 - Validar tokens en solicitudes protegidas | validado | Token ausente, token manipulado y token valido en `/api/usuarios/me` |
+| RF-005 - Expirar sesiones | validado | Expiracion por inactividad, error `sesion.expirada` y estado `EXPIRADA` |
+| RF-006 - Cerrar sesion manualmente | validado | Logout autenticado, invalidacion del token y rechazo de logout sin autenticacion |
+| RF-007 - Permitir sesiones multiples | validado | Dos tokens independientes y segunda sesion activa tras cerrar la primera |
+| RNF-001 - Seguridad de credenciales | validado parcialmente | BCrypt y ausencia de credenciales en respuestas; el canal seguro depende del entorno |
+| RNF-002 - Seguridad de tokens | validado | Firma HMAC-SHA256, expiracion, hash persistido y rechazo de tokens manipulados o invalidados |
+| RNF-003 - Separacion arquitectonica | validado | Capas de dominio, aplicacion, infraestructura y presentacion separadas |
+| RNF-004 - Contrato HTTP estable | validado | Rutas, JSON, cookies, estados HTTP y codigos de dominio verificados |
+| RNF-005 - Resiliencia y consistencia | validado parcialmente | Logout repetido y sesiones multiples verificadas; faltan pruebas dedicadas de concurrencia y almacenamiento no disponible |
 
----
+## Pendientes y limitaciones
 
-## Conclusión
+- Ejecutar la suite completa de pruebas del proyecto para comprobar regresiones globales.
+- Añadir o ejecutar pruebas dedicadas de concurrencia de logins.
+- Añadir o ejecutar pruebas dedicadas para indisponibilidad del almacenamiento de sesiones.
+- Revisar el secreto alternativo de desarrollo (`app.session.secret`) antes de un despliegue productivo y exigir configuracion segura por entorno.
+- Confirmar en el entorno de despliegue el uso obligatorio de HTTPS para el transporte de credenciales.
+- Actualizar `tasks.md` y el estado formal del cambio cuando finalice la validacion global.
 
-CHG‑0008 queda **completamente validado**.  
-La implementación cumple todos los requisitos funcionales y no funcionales definidos para el ciclo de sesiones, incluyendo login, autenticación, expiración, logout, protección de rutas y trazabilidad de errores.
+## Conclusion
 
-El cambio puede marcarse como **aprobado** y la carpeta correspondiente puede moverse a `validado/`.
-
-
+La implementacion de sesiones de CHG-0008 funciona para el flujo validado de login, autenticacion de rutas protegidas, expiracion, logout y sesiones multiples: sus ocho pruebas de aceptacion pasan correctamente. El cambio no debe marcarse como completamente cerrado hasta ejecutar la validacion global y resolver las limitaciones indicadas.

@@ -88,7 +88,7 @@ class SesionAcceptanceTest {
     }
 
     @Test
-    void rechazaCredencialesInvalidasSinRevelarSiElUsuarioExisteNiCrearSesion() throws Exception {
+        void rechazaCredencialesInvalidasYUsuarioInexistenteSinCrearSesion() throws Exception {
         String email = emailUnico();
         registrar(email);
 
@@ -97,9 +97,26 @@ class SesionAcceptanceTest {
                 .andExpect(jsonPath("$.code").value("sesion.credenciales-invalidas"))
                 .andExpect(jsonPath("$.token").doesNotExist());
         login(emailUnico(), PASSWORD)
-                .andExpect(status().isUnauthorized())
-                .andExpect(jsonPath("$.code").value("sesion.credenciales-invalidas"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code").value("usuario.no-existe"))
                 .andExpect(jsonPath("$.token").doesNotExist());
+
+        assertThat(sesionRepository.count()).isZero();
+    }
+
+    @Test
+    void rechazaEmailInvalidoYCamposAusentesSinCrearSesion() throws Exception {
+        mockMvc.perform(post("/api/sesiones/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"email\":\"no-es-un-email\",\"password\":\"Secreta-123\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("sesion.datos-invalidos"));
+
+        mockMvc.perform(post("/api/sesiones/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"email\":\"jugador@example.com\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("sesion.datos-invalidos"));
 
         assertThat(sesionRepository.count()).isZero();
     }
@@ -143,13 +160,21 @@ class SesionAcceptanceTest {
         mockMvc.perform(post("/api/sesiones/logout").header("Authorization", "Bearer " + primerToken))
                 .andExpect(status().isNoContent());
         mockMvc.perform(post("/api/sesiones/logout").header("Authorization", "Bearer " + primerToken))
-                .andExpect(status().isNoContent());
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.code").value("sesion.token-invalido"));
         mockMvc.perform(get("/api/usuarios/me").header("Authorization", "Bearer " + primerToken))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.code").value("sesion.token-invalido"));
         mockMvc.perform(get("/api/usuarios/me").header("Authorization", "Bearer " + segundoToken))
                 .andExpect(status().isOk());
     }
+
+        @Test
+        void rechazaLogoutSinSesionAutenticada() throws Exception {
+                mockMvc.perform(post("/api/sesiones/logout"))
+                                .andExpect(status().isUnauthorized())
+                                .andExpect(jsonPath("$.code").value("sesion.no-autenticado"));
+        }
 
     @Test
     void expiraSesionPorInactividadYNoLaReactiva() throws Exception {
