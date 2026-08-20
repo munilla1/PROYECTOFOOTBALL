@@ -1,0 +1,1066 @@
+Picked up JAVA_TOOL_OPTIONS: -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< com.example:football >------------------------
+[INFO] Building football 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ football ---
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] Copying 19 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ football ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ football ---
+[INFO] skip non existing resourceDirectory c:\Users\mucho\Desktop\ProyectoFootball\football\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ football ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ football ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8
+[INFO] Running com.example.football.acceptance.SesionAcceptanceTest
+18:31:52.135 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.football.acceptance.SesionAcceptanceTest]: SesionAcceptanceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:31:52.223 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.football.FootballApplication for test class com.example.football.acceptance.SesionAcceptanceTest
+18:31:52.283 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.football.acceptance.SesionAcceptanceTest]: SesionAcceptanceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:31:52.298 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.football.FootballApplication for test class com.example.football.acceptance.SesionAcceptanceTest
+18:31:52.350 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::       (v4.1.1-SNAPSHOT)
+
+2026-08-20T18:31:52.600+02:00  INFO 23472 --- [football] [           main] c.e.f.acceptance.SesionAcceptanceTest    : Starting SesionAcceptanceTest using Java 21.0.5 with PID 23472 (started by mucho in c:\Users\mucho\Desktop\ProyectoFootball\football)
+2026-08-20T18:31:52.600+02:00  INFO 23472 --- [football] [           main] c.e.f.acceptance.SesionAcceptanceTest    : The following 1 profile is active: "test"
+2026-08-20T18:31:53.150+02:00  INFO 23472 --- [football] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-20T18:31:53.212+02:00  INFO 23472 --- [football] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 49 ms. Found 3 JPA repository interfaces.
+2026-08-20T18:31:53.723+02:00  INFO 23472 --- [football] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-08-20T18:31:53.785+02:00  INFO 23472 --- [football] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-08-20T18:31:54.229+02:00  INFO 23472 --- [football] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-20T18:31:54.250+02:00  INFO 23472 --- [football] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-08-20T18:31:54.334+02:00  INFO 23472 --- [football] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@118e2487
+2026-08-20T18:31:54.334+02:00  INFO 23472 --- [football] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-08-20T18:31:54.367+02:00  WARN 23472 --- [football] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-20T18:31:54.383+02:00  INFO 23472 --- [football] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/football_test]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.6
+	Default catalog/schema: football_test/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-20T18:31:55.135+02:00  INFO 23472 --- [football] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-20T18:31:55.240+02:00  INFO 23472 --- [football] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-20T18:31:55.300+02:00  INFO 23472 --- [football] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-20T18:31:56.200+02:00  WARN 23472 --- [football] [           main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 07e56843-1488-4496-b482-fa75c4e4a24c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-08-20T18:31:56.200+02:00  INFO 23472 --- [football] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-08-20T18:31:56.650+02:00  INFO 23472 --- [football] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-08-20T18:31:56.650+02:00  INFO 23472 --- [football] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-08-20T18:31:56.650+02:00  INFO 23472 --- [football] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-08-20T18:31:56.750+02:00  INFO 23472 --- [football] [           main] c.e.f.acceptance.SesionAcceptanceTest    : Started SesionAcceptanceTest in 4.414 seconds (process running for 5.295)
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (C:\Users\mucho\.m2\repository\net\bytebuddy\byte-buddy-agent\1.18.11\byte-buddy-agent-1.18.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/usuarios
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"111"]
+             Body = {"nombre":"Jugador","email":"sesion-55938f0f-59cc-4087-8617-020557dad39d@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.usuario.presentation.UsuarioController
+           Method = com.example.football.usuario.presentation.UsuarioController#registrar(RegistroRequest)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"id":"db1bc4f3-a8d1-4bf7-9f22-98b848c1130b","nombre":"Jugador","email":"sesion-55938f0f-59cc-4087-8617-020557dad39d@example.com","rol":"USUARIO","membresia":"TRIAL","fechaCreacion":"2026-08-20T16:31:57.434135Z","fechaInicioTrial":"2026-08-20T16:31:57.434135Z","fechaExpiracionMembresia":"2026-08-27T16:31:57.434135Z","nivel":1,"xp":0,"energia":100,"estadoJugador":"NORMAL","estadisticasAcumuladas":"{}","historialPartidos":"[]"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/sesiones/login
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"92"]
+             Body = {"email":"sesion-55938f0f-59cc-4087-8617-020557dad39d@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.sesiones.presentation.SesionController
+           Method = com.example.football.sesiones.presentation.SesionController#login(LoginRequest, HttpServletResponse)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Set-Cookie:"football_session=2a9caf31-2369-4e5c-a7f1-5798b7be303a.db1bc4f3-a8d1-4bf7-9f22-98b848c1130b.1787243517.1787272317.Ci6_Spkkx9QVPPZnDHv_HA.Awd8pxl7oFhPoFrp5eRR8DnWFicHDvJJVcq6uuFzLgg; Path=/; HttpOnly; SameSite=Lax", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"token":"2a9caf31-2369-4e5c-a7f1-5798b7be303a.db1bc4f3-a8d1-4bf7-9f22-98b848c1130b.1787243517.1787272317.Ci6_Spkkx9QVPPZnDHv_HA.Awd8pxl7oFhPoFrp5eRR8DnWFicHDvJJVcq6uuFzLgg","expiresAt":"2026-08-21T00:31:57.550955Z","userId":"db1bc4f3-a8d1-4bf7-9f22-98b848c1130b"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = [[MockCookie@362a2806 name = 'football_session', value = '2a9caf31-2369-4e5c-a7f1-5798b7be303a.db1bc4f3-a8d1-4bf7-9f22-98b848c1130b.1787243517.1787272317.Ci6_Spkkx9QVPPZnDHv_HA.Awd8pxl7oFhPoFrp5eRR8DnWFicHDvJJVcq6uuFzLgg', comment = [null], domain = [null], maxAge = -1, path = '/', secure = false, version = 0, httpOnly = true]]
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /api/usuarios/me
+       Parameters = {}
+          Headers = [Authorization:"Bearer 2a9caf31-2369-4e5c-a7f1-5798b7be303a.db1bc4f3-a8d1-4bf7-9f22-98b848c1130b.1787243517.1787272317.Ci6_Spkkx9QVPPZnDHv_HA.Awd8pxl7oFhPoFrp5eRR8DnWFicHDvJJVcq6uuFzLgg"]
+             Body = null
+    Session Attrs = {SPRING_SECURITY_SAVED_REQUEST=DefaultSavedRequest [http://localhost/api/usuarios/me?continue]}
+
+Handler:
+             Type = null
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = Unauthorized
+          Headers = [WWW-Authenticate:"Basic realm="Realm", charset="UTF-8"", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/usuarios
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"111"]
+             Body = {"nombre":"Jugador","email":"sesion-cc082d8c-a0e5-4b41-a8b6-aee9bd32f17f@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.usuario.presentation.UsuarioController
+           Method = com.example.football.usuario.presentation.UsuarioController#registrar(RegistroRequest)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"id":"09c15044-9ca6-4781-9c1d-5c90ab193e63","nombre":"Jugador","email":"sesion-cc082d8c-a0e5-4b41-a8b6-aee9bd32f17f@example.com","rol":"USUARIO","membresia":"TRIAL","fechaCreacion":"2026-08-20T16:31:58.774964900Z","fechaInicioTrial":"2026-08-20T16:31:58.774964900Z","fechaExpiracionMembresia":"2026-08-27T16:31:58.774964900Z","nivel":1,"xp":0,"energia":100,"estadoJugador":"NORMAL","estadisticasAcumuladas":"{}","historialPartidos":"[]"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/sesiones/login
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"92"]
+             Body = {"email":"sesion-cc082d8c-a0e5-4b41-a8b6-aee9bd32f17f@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.sesiones.presentation.SesionController
+           Method = com.example.football.sesiones.presentation.SesionController#login(LoginRequest, HttpServletResponse)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Set-Cookie:"football_session=4ba53b19-dad3-4908-8146-6b6a6a0bea41.09c15044-9ca6-4781-9c1d-5c90ab193e63.1787243518.1787272318.CbyLebNNQtdwRak72wWcHA.qrNu6rQu8MnNVkLvfDoXmXvkwyd-8ZccjukjxrQJvk0; Path=/; HttpOnly; SameSite=Lax", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"token":"4ba53b19-dad3-4908-8146-6b6a6a0bea41.09c15044-9ca6-4781-9c1d-5c90ab193e63.1787243518.1787272318.CbyLebNNQtdwRak72wWcHA.qrNu6rQu8MnNVkLvfDoXmXvkwyd-8ZccjukjxrQJvk0","expiresAt":"2026-08-21T00:31:58.836292Z","userId":"09c15044-9ca6-4781-9c1d-5c90ab193e63"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = [[MockCookie@45e65f8 name = 'football_session', value = '4ba53b19-dad3-4908-8146-6b6a6a0bea41.09c15044-9ca6-4781-9c1d-5c90ab193e63.1787243518.1787272318.CbyLebNNQtdwRak72wWcHA.qrNu6rQu8MnNVkLvfDoXmXvkwyd-8ZccjukjxrQJvk0', comment = [null], domain = [null], maxAge = -1, path = '/', secure = false, version = 0, httpOnly = true]]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/usuarios
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"111"]
+             Body = {"nombre":"Jugador","email":"sesion-98bb1c17-e786-411c-8118-17dbd9211458@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.usuario.presentation.UsuarioController
+           Method = com.example.football.usuario.presentation.UsuarioController#registrar(RegistroRequest)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"id":"f6f4cc74-d016-4341-9faa-05ed83ce8800","nombre":"Jugador","email":"sesion-98bb1c17-e786-411c-8118-17dbd9211458@example.com","rol":"USUARIO","membresia":"TRIAL","fechaCreacion":"2026-08-20T16:31:58.923438700Z","fechaInicioTrial":"2026-08-20T16:31:58.923438700Z","fechaExpiracionMembresia":"2026-08-27T16:31:58.923438700Z","nivel":1,"xp":0,"energia":100,"estadoJugador":"NORMAL","estadisticasAcumuladas":"{}","historialPartidos":"[]"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/sesiones/login
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"92"]
+             Body = {"email":"sesion-98bb1c17-e786-411c-8118-17dbd9211458@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.sesiones.presentation.SesionController
+           Method = com.example.football.sesiones.presentation.SesionController#login(LoginRequest, HttpServletResponse)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Set-Cookie:"football_session=cab78b13-fe46-4669-98ac-828b1b85e8aa.f6f4cc74-d016-4341-9faa-05ed83ce8800.1787243518.1787272318.Lr6ZsvKCTK2RPRodsLUzCQ.a1pU-FU5SSU4sDyNApGYa1zbGAqHIkaW-3SJ9dmrlTs; Path=/; HttpOnly; SameSite=Lax", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"token":"cab78b13-fe46-4669-98ac-828b1b85e8aa.f6f4cc74-d016-4341-9faa-05ed83ce8800.1787243518.1787272318.Lr6ZsvKCTK2RPRodsLUzCQ.a1pU-FU5SSU4sDyNApGYa1zbGAqHIkaW-3SJ9dmrlTs","expiresAt":"2026-08-21T00:31:58.985338700Z","userId":"f6f4cc74-d016-4341-9faa-05ed83ce8800"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = [[MockCookie@b17f68 name = 'football_session', value = 'cab78b13-fe46-4669-98ac-828b1b85e8aa.f6f4cc74-d016-4341-9faa-05ed83ce8800.1787243518.1787272318.Lr6ZsvKCTK2RPRodsLUzCQ.a1pU-FU5SSU4sDyNApGYa1zbGAqHIkaW-3SJ9dmrlTs', comment = [null], domain = [null], maxAge = -1, path = '/', secure = false, version = 0, httpOnly = true]]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/sesiones/login
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"92"]
+             Body = {"email":"sesion-98bb1c17-e786-411c-8118-17dbd9211458@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.sesiones.presentation.SesionController
+           Method = com.example.football.sesiones.presentation.SesionController#login(LoginRequest, HttpServletResponse)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Set-Cookie:"football_session=a3cec3a6-7291-403e-ac2a-ec01175ea696.f6f4cc74-d016-4341-9faa-05ed83ce8800.1787243519.1787272319.zYyqTvPtpWnF6zAAYu3WCg.HeBQPjQhggc5WRkgFFoxe3cu7hh90IX57nRqBta8KZA; Path=/; HttpOnly; SameSite=Lax", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"token":"a3cec3a6-7291-403e-ac2a-ec01175ea696.f6f4cc74-d016-4341-9faa-05ed83ce8800.1787243519.1787272319.zYyqTvPtpWnF6zAAYu3WCg.HeBQPjQhggc5WRkgFFoxe3cu7hh90IX57nRqBta8KZA","expiresAt":"2026-08-21T00:31:59.051416200Z","userId":"f6f4cc74-d016-4341-9faa-05ed83ce8800"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = [[MockCookie@1b506c3b name = 'football_session', value = 'a3cec3a6-7291-403e-ac2a-ec01175ea696.f6f4cc74-d016-4341-9faa-05ed83ce8800.1787243519.1787272319.zYyqTvPtpWnF6zAAYu3WCg.HeBQPjQhggc5WRkgFFoxe3cu7hh90IX57nRqBta8KZA', comment = [null], domain = [null], maxAge = -1, path = '/', secure = false, version = 0, httpOnly = true]]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/sesiones/logout
+       Parameters = {}
+          Headers = [Authorization:"Bearer cab78b13-fe46-4669-98ac-828b1b85e8aa.f6f4cc74-d016-4341-9faa-05ed83ce8800.1787243518.1787272318.Lr6ZsvKCTK2RPRodsLUzCQ.a1pU-FU5SSU4sDyNApGYa1zbGAqHIkaW-3SJ9dmrlTs"]
+             Body = null
+    Session Attrs = {SPRING_SECURITY_SAVED_REQUEST=DefaultSavedRequest [http://localhost/api/sesiones/logout?continue]}
+
+Handler:
+             Type = null
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = Unauthorized
+          Headers = [WWW-Authenticate:"Basic realm="Realm", charset="UTF-8"", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/usuarios
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"111"]
+             Body = {"nombre":"Jugador","email":"sesion-d9d13b77-65e0-4ca2-aa64-04d6728c316c@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.usuario.presentation.UsuarioController
+           Method = com.example.football.usuario.presentation.UsuarioController#registrar(RegistroRequest)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"id":"7eeaf6cf-ee41-4c7e-931c-933bd816192f","nombre":"Jugador","email":"sesion-d9d13b77-65e0-4ca2-aa64-04d6728c316c@example.com","rol":"USUARIO","membresia":"TRIAL","fechaCreacion":"2026-08-20T16:31:59.272862300Z","fechaInicioTrial":"2026-08-20T16:31:59.272862300Z","fechaExpiracionMembresia":"2026-08-27T16:31:59.272862300Z","nivel":1,"xp":0,"energia":100,"estadoJugador":"NORMAL","estadisticasAcumuladas":"{}","historialPartidos":"[]"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/sesiones/login
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"92"]
+             Body = {"email":"sesion-d9d13b77-65e0-4ca2-aa64-04d6728c316c@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.sesiones.presentation.SesionController
+           Method = com.example.football.sesiones.presentation.SesionController#login(LoginRequest, HttpServletResponse)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Set-Cookie:"football_session=79473356-e4e5-468c-9c46-4af251af8841.7eeaf6cf-ee41-4c7e-931c-933bd816192f.1787243519.1787272319.aSzeiXVT2c8ak1j7oMP9eQ.De4OpRjJiHuqX-9f63A8cj1Dj3dJ5CXcT044OaW0z0I; Path=/; HttpOnly; SameSite=Lax", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"token":"79473356-e4e5-468c-9c46-4af251af8841.7eeaf6cf-ee41-4c7e-931c-933bd816192f.1787243519.1787272319.aSzeiXVT2c8ak1j7oMP9eQ.De4OpRjJiHuqX-9f63A8cj1Dj3dJ5CXcT044OaW0z0I","expiresAt":"2026-08-21T00:31:59.337267400Z","userId":"7eeaf6cf-ee41-4c7e-931c-933bd816192f"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = [[MockCookie@30b3d9ef name = 'football_session', value = '79473356-e4e5-468c-9c46-4af251af8841.7eeaf6cf-ee41-4c7e-931c-933bd816192f.1787243519.1787272319.aSzeiXVT2c8ak1j7oMP9eQ.De4OpRjJiHuqX-9f63A8cj1Dj3dJ5CXcT044OaW0z0I', comment = [null], domain = [null], maxAge = -1, path = '/', secure = false, version = 0, httpOnly = true]]
+[ERROR] Tests run: 8, Failures: 3, Errors: 2, Skipped: 0, Time elapsed: 7.405 s <<< FAILURE! -- in com.example.football.acceptance.SesionAcceptanceTest
+[ERROR] com.example.football.acceptance.SesionAcceptanceTest.expiraSesionPorInactividadYNoLaReactiva -- Time elapsed: 1.377 s <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "$.code"
+	at org.springframework.test.util.JsonPathExpectationsHelper.evaluateJsonPath(JsonPathExpectationsHelper.java:350)
+	at org.springframework.test.util.JsonPathExpectationsHelper.assertValue(JsonPathExpectationsHelper.java:148)
+	at org.springframework.test.web.servlet.result.JsonPathResultMatchers.lambda$value$2(JsonPathResultMatchers.java:111)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:212)
+	at com.example.football.acceptance.SesionAcceptanceTest.expiraSesionPorInactividadYNoLaReactiva(SesionAcceptanceTest.java:176)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at com.jayway.jsonpath.internal.Utils.notEmpty(Utils.java:401)
+	at com.jayway.jsonpath.JsonPath.read(JsonPath.java:390)
+	at org.springframework.test.util.JsonPathExpectationsHelper.evaluateJsonPath(JsonPathExpectationsHelper.java:347)
+	... 4 more
+
+[ERROR] com.example.football.acceptance.SesionAcceptanceTest.iniciaSesionSinExponerCredencialesYPermiteVariasSesiones -- Time elapsed: 0.150 s <<< FAILURE!
+java.lang.AssertionError: Response cookie 'football_session' secure expected:<true> but was:<false>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:62)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:129)
+	at org.springframework.test.web.servlet.result.CookieResultMatchers.lambda$secure$0(CookieResultMatchers.java:217)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:212)
+	at com.example.football.acceptance.SesionAcceptanceTest.iniciaSesionSinExponerCredencialesYPermiteVariasSesiones(SesionAcceptanceTest.java:64)
+
+[ERROR] com.example.football.acceptance.SesionAcceptanceTest.rechazaLogoutSinSesionAutenticada -- Time elapsed: 0.011 s <<< ERROR!
+com.example.football.usuario.presentation.UnauthorizedException: Se requiere una sesion autenticada
+	at com.example.football.sesiones.presentation.SesionAuthenticationFilter.doFilterInternal(SesionAuthenticationFilter.java:47)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:199)
+	at com.example.football.acceptance.SesionAcceptanceTest.rechazaLogoutSinSesionAutenticada(SesionAcceptanceTest.java:162)
+
+[ERROR] com.example.football.acceptance.SesionAcceptanceTest.logoutEsIdempotenteRevocaSoloLaSesionCerrada -- Time elapsed: 0.200 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<204> but was:<401>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:62)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:129)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$0(StatusResultMatchers.java:600)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:212)
+	at com.example.football.acceptance.SesionAcceptanceTest.logoutEsIdempotenteRevocaSoloLaSesionCerrada(SesionAcceptanceTest.java:149)
+
+[ERROR] com.example.football.acceptance.SesionAcceptanceTest.protegeRutasYExponeSoloLaIdentidadAutenticada -- Time elapsed: 0.146 s <<< ERROR!
+com.example.football.usuario.presentation.UnauthorizedException: Se requiere una sesion autenticada
+	at com.example.football.sesiones.presentation.SesionAuthenticationFilter.doFilterInternal(SesionAuthenticationFilter.java:47)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:199)
+	at com.example.football.acceptance.SesionAcceptanceTest.protegeRutasYExponeSoloLaIdentidadAutenticada(SesionAcceptanceTest.java:129)
+
+[INFO] Running com.example.football.acceptance.UsuarioAcceptanceTest
+2026-08-20T18:31:59.366+02:00  INFO 23472 --- [football] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.football.acceptance.UsuarioAcceptanceTest]: UsuarioAcceptanceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-08-20T18:31:59.373+02:00  INFO 23472 --- [football] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.football.FootballApplication for test class com.example.football.acceptance.UsuarioAcceptanceTest
+2026-08-20T18:31:59.373+02:00  INFO 23472 --- [football] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.football.acceptance.UsuarioAcceptanceTest]: UsuarioAcceptanceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-08-20T18:31:59.373+02:00  INFO 23472 --- [football] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.football.FootballApplication for test class com.example.football.acceptance.UsuarioAcceptanceTest
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/usuarios
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"116"]
+             Body = {"nombre":"Propietario","email":"usuario-ff82b102-eaa8-4f5a-b252-dee8546c5ada@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.usuario.presentation.UsuarioController
+           Method = com.example.football.usuario.presentation.UsuarioController#registrar(RegistroRequest)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"id":"08debb3c-e6cc-4413-982c-9bf613c2dafd","nombre":"Propietario","email":"usuario-ff82b102-eaa8-4f5a-b252-dee8546c5ada@example.com","rol":"USUARIO","membresia":"TRIAL","fechaCreacion":"2026-08-20T16:31:59.437335100Z","fechaInicioTrial":"2026-08-20T16:31:59.437335100Z","fechaExpiracionMembresia":"2026-08-27T16:31:59.437335100Z","nivel":1,"xp":0,"energia":100,"estadoJugador":"NORMAL","estadisticasAcumuladas":"{}","historialPartidos":"[]"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/usuarios
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"109"]
+             Body = {"nombre":"Otro","email":"usuario-c8aa61ae-f3ad-4fe4-9346-692843734f42@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.usuario.presentation.UsuarioController
+           Method = com.example.football.usuario.presentation.UsuarioController#registrar(RegistroRequest)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"id":"44b8dcbe-7885-4fa0-ad47-4f1e0df8ed85","nombre":"Otro","email":"usuario-c8aa61ae-f3ad-4fe4-9346-692843734f42@example.com","rol":"USUARIO","membresia":"TRIAL","fechaCreacion":"2026-08-20T16:31:59.501101500Z","fechaInicioTrial":"2026-08-20T16:31:59.501101500Z","fechaExpiracionMembresia":"2026-08-27T16:31:59.501101500Z","nivel":1,"xp":0,"energia":100,"estadoJugador":"NORMAL","estadisticasAcumuladas":"{}","historialPartidos":"[]"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /api/usuarios/me
+       Parameters = {}
+          Headers = []
+             Body = null
+    Session Attrs = {SPRING_SECURITY_SAVED_REQUEST=DefaultSavedRequest [http://localhost/api/usuarios/me?continue]}
+
+Handler:
+             Type = null
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = Unauthorized
+          Headers = [WWW-Authenticate:"Basic realm="Realm", charset="UTF-8"", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/usuarios
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"112"]
+             Body = {"nombre":"Jugador","email":"usuario-928e3403-3f62-47a7-92e6-29b6ecdb2fd8@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.usuario.presentation.UsuarioController
+           Method = com.example.football.usuario.presentation.UsuarioController#registrar(RegistroRequest)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"id":"3315782b-1b7d-4ebf-a967-5ccb8aa5f9f3","nombre":"Jugador","email":"usuario-928e3403-3f62-47a7-92e6-29b6ecdb2fd8@example.com","rol":"USUARIO","membresia":"TRIAL","fechaCreacion":"2026-08-20T16:31:59.735542900Z","fechaInicioTrial":"2026-08-20T16:31:59.735542900Z","fechaExpiracionMembresia":"2026-08-27T16:31:59.735542900Z","nivel":1,"xp":0,"energia":100,"estadoJugador":"NORMAL","estadisticasAcumuladas":"{}","historialPartidos":"[]"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /api/usuarios/me/progreso
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"14"]
+             Body = {"energia":40}
+    Session Attrs = {SPRING_SECURITY_SAVED_REQUEST=DefaultSavedRequest [http://localhost/api/usuarios/me/progreso?continue]}
+
+Handler:
+             Type = null
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = Unauthorized
+          Headers = [WWW-Authenticate:"Basic realm="Realm", charset="UTF-8"", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/usuarios
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"112"]
+             Body = {"nombre":"Jugador","email":"usuario-d99b2375-61c2-4a66-92ba-782a0fb2b9d9@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.usuario.presentation.UsuarioController
+           Method = com.example.football.usuario.presentation.UsuarioController#registrar(RegistroRequest)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"id":"026d9a26-797f-4708-9555-ccecebfd308c","nombre":"Jugador","email":"usuario-d99b2375-61c2-4a66-92ba-782a0fb2b9d9@example.com","rol":"USUARIO","membresia":"TRIAL","fechaCreacion":"2026-08-20T16:31:59.802901800Z","fechaInicioTrial":"2026-08-20T16:31:59.802901800Z","fechaExpiracionMembresia":"2026-08-27T16:31:59.802901800Z","nivel":1,"xp":0,"energia":100,"estadoJugador":"NORMAL","estadisticasAcumuladas":"{}","historialPartidos":"[]"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /api/usuarios/me/progreso
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"83"]
+             Body = {"nivel":4,"xp":850,"energia":63,"estado":"LESIONADO","historialPartidos":"[1,2]"}
+
+    Session Attrs = {SPRING_SECURITY_SAVED_REQUEST=DefaultSavedRequest [http://localhost/api/usuarios/me/progreso?continue]}
+
+Handler:
+             Type = null
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = Unauthorized
+          Headers = [WWW-Authenticate:"Basic realm="Realm", charset="UTF-8"", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/usuarios
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"112"]
+             Body = {"nombre":"Jugador","email":"usuario-c0ee27ab-4109-45f3-9c25-abd9f608584b@example.com","password":"Secreta-123"}
+    Session Attrs = {}
+
+Handler:
+             Type = com.example.football.usuario.presentation.UsuarioController
+           Method = com.example.football.usuario.presentation.UsuarioController#registrar(RegistroRequest)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"id":"c87d6d13-cbf2-459d-a7fd-f6ab12e67821","nombre":"Jugador","email":"usuario-c0ee27ab-4109-45f3-9c25-abd9f608584b@example.com","rol":"USUARIO","membresia":"TRIAL","fechaCreacion":"2026-08-20T16:31:59.953960800Z","fechaInicioTrial":"2026-08-20T16:31:59.953960800Z","fechaExpiracionMembresia":"2026-08-27T16:31:59.953960800Z","nivel":1,"xp":0,"energia":100,"estadoJugador":"NORMAL","estadisticasAcumuladas":"{}","historialPartidos":"[]"}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /api/usuarios/me/progreso
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"15"]
+             Body = {"energia":101}
+    Session Attrs = {SPRING_SECURITY_SAVED_REQUEST=DefaultSavedRequest [http://localhost/api/usuarios/me/progreso?continue]}
+
+Handler:
+             Type = null
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = Unauthorized
+          Headers = [WWW-Authenticate:"Basic realm="Realm", charset="UTF-8"", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+[ERROR] Tests run: 7, Failures: 4, Errors: 1, Skipped: 0, Time elapsed: 0.589 s <<< FAILURE! -- in com.example.football.acceptance.UsuarioAcceptanceTest
+[ERROR] com.example.football.acceptance.UsuarioAcceptanceTest.bloqueaAccesoSinSesionYAccesoAlProgresoDeOtroUsuario -- Time elapsed: 0.138 s <<< ERROR!
+com.example.football.usuario.presentation.UnauthorizedException: Se requiere una sesion autenticada
+	at com.example.football.sesiones.presentation.SesionAuthenticationFilter.doFilterInternal(SesionAuthenticationFilter.java:47)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.test.web.servlet.setup.MockMvcFilterDecorator.doFilter(MockMvcFilterDecorator.java:160)
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:127)
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:199)
+	at com.example.football.acceptance.UsuarioAcceptanceTest.bloqueaAccesoSinSesionYAccesoAlProgresoDeOtroUsuario(UsuarioAcceptanceTest.java:152)
+
+[ERROR] com.example.football.acceptance.UsuarioAcceptanceTest.devuelveNoEncontradoSinCrearUsuario -- Time elapsed: 0.026 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<404> but was:<401>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:62)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:129)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$0(StatusResultMatchers.java:600)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:212)
+	at com.example.football.acceptance.UsuarioAcceptanceTest.devuelveNoEncontradoSinCrearUsuario(UsuarioAcceptanceTest.java:166)
+
+[ERROR] com.example.football.acceptance.UsuarioAcceptanceTest.actualizacionParcialConservaLosCamposNoModificados -- Time elapsed: 0.071 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<401>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:62)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:129)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$0(StatusResultMatchers.java:600)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:212)
+	at com.example.football.acceptance.UsuarioAcceptanceTest.actualizacionParcialConservaLosCamposNoModificados(UsuarioAcceptanceTest.java:124)
+
+[ERROR] com.example.football.acceptance.UsuarioAcceptanceTest.recuperaElProgresoPersistidoDelUsuarioAutenticado -- Time elapsed: 0.074 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<401>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:62)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:129)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$0(StatusResultMatchers.java:600)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:212)
+	at com.example.football.acceptance.UsuarioAcceptanceTest.recuperaElProgresoPersistidoDelUsuarioAutenticado(UsuarioAcceptanceTest.java:104)
+
+[ERROR] com.example.football.acceptance.UsuarioAcceptanceTest.rechazaProgresoInvalidoYConservaElUltimoEstadoConfirmado -- Time elapsed: 0.072 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<400> but was:<401>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:62)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:129)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$0(StatusResultMatchers.java:600)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:212)
+	at com.example.football.acceptance.UsuarioAcceptanceTest.rechazaProgresoInvalidoYConservaElUltimoEstadoConfirmado(UsuarioAcceptanceTest.java:139)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   SesionAcceptanceTest.expiraSesionPorInactividadYNoLaReactiva:176 No value at JSON path "$.code"
+[ERROR]   SesionAcceptanceTest.iniciaSesionSinExponerCredencialesYPermiteVariasSesiones:64 Response cookie 'football_session' secure expected:<true> but was:<false>
+[ERROR]   SesionAcceptanceTest.logoutEsIdempotenteRevocaSoloLaSesionCerrada:149 Status expected:<204> but was:<401>
+[ERROR]   UsuarioAcceptanceTest.actualizacionParcialConservaLosCamposNoModificados:124 Status expected:<200> but was:<401>
+[ERROR]   UsuarioAcceptanceTest.devuelveNoEncontradoSinCrearUsuario:166 Status expected:<404> but was:<401>
+[ERROR]   UsuarioAcceptanceTest.rechazaProgresoInvalidoYConservaElUltimoEstadoConfirmado:139 Status expected:<400> but was:<401>
+[ERROR]   UsuarioAcceptanceTest.recuperaElProgresoPersistidoDelUsuarioAutenticado:104 Status expected:<200> but was:<401>
+[ERROR] Errors: 
+[ERROR]   SesionAcceptanceTest.protegeRutasYExponeSoloLaIdentidadAutenticada:129 » Unauthorized Se requiere una sesion autenticada
+[ERROR]   SesionAcceptanceTest.rechazaLogoutSinSesionAutenticada:162 » Unauthorized Se requiere una sesion autenticada
+[ERROR]   UsuarioAcceptanceTest.bloqueaAccesoSinSesionYAccesoAlProgresoDeOtroUsuario:152 » Unauthorized Se requiere una sesion autenticada
+[INFO] 
+[ERROR] Tests run: 15, Failures: 7, Errors: 3, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.148 s
+[INFO] Finished at: 2026-08-20T18:32:00+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.6:test (default-test) on project football: There are test failures.
+[ERROR] 
+[ERROR] See c:\Users\mucho\Desktop\ProyectoFootball\football\target\surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

@@ -1,11 +1,14 @@
 package com.example.football.usuario.infrastructure;
 
 import com.example.football.usuario.application.UsuarioRepository;
+import com.example.football.usuario.application.UsuarioNotFoundException;
 import com.example.football.usuario.domain.ProgresoJugador;
+import com.example.football.usuario.domain.Rol;
 import com.example.football.usuario.domain.Usuario;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,6 +37,28 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
     @Override
     public Optional<Usuario> findByEmail(String email) {
         return repository.findByEmailIgnoreCase(email).map(this::toDomain);
+    }
+
+    @Override
+    public Rol obtenerRolDelUsuario(UUID usuarioId) {
+        return repository.findById(usuarioId)
+                .map(UsuarioJpaEntity::getRol)
+                .orElseThrow(() -> new UsuarioNotFoundException("Usuario no encontrado"));
+    }
+
+    @Override
+    public void actualizarRol(UUID usuarioId, Rol nuevoRol) {
+        UsuarioJpaEntity entity = repository.findById(usuarioId)
+                .orElseThrow(() -> new UsuarioNotFoundException("Usuario no encontrado"));
+        entity.setRol(nuevoRol);
+        repository.save(entity);
+    }
+
+    @Override
+    public List<Usuario> findAll() {
+        return repository.findAll().stream()
+                .map(this::toDomain)
+                .toList();
     }
 
     private UsuarioJpaEntity toEntity(Usuario usuario) {

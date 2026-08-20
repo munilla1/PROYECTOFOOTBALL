@@ -27,17 +27,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @TestPropertySource(properties = {
-    "spring.datasource.url=jdbc:postgresql://localhost:5432/football_test",
-    "spring.datasource.username=postgres",
-    "spring.datasource.password=PostgreSQL17",
-    "spring.datasource.driver-class-name=org.postgresql.Driver",
-    "spring.jpa.hibernate.ddl-auto=create-drop",
-    "spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect",
     "app.session.duration=PT1H",
     "app.session.inactivity-timeout=PT1S",
     "app.session.secure-cookie=true"
 })
-
 class SesionAcceptanceTest {
     private static final String PASSWORD = "Secreta-123";
 

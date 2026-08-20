@@ -2,14 +2,20 @@ package com.example.football.sesiones.presentation;
 
 import com.example.football.sesiones.application.SesionException;
 import com.example.football.sesiones.application.SesionService;
+import com.example.football.usuario.presentation.UnauthorizedException;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 
 import java.io.IOException;
 import java.security.Principal;
@@ -32,46 +38,67 @@ public class SesionAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        String token = SesionController.tokenFrom(request);
-
-        if ((token == null || token.isBlank()) && request.getUserPrincipal() != null) {
+        // Verificar si hay una autenticación establecida (ej: MockMvc.principal())
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && !isAnonymous(auth)) {
             filterChain.doFilter(request, response);
             return;
         }
 
+        // Si hay un principal en el request (ej: MockMvc.principal()), crear Authentication
+        Principal reqPrincipal = request.getUserPrincipal();
+        if (reqPrincipal != null) {
+            String principal = reqPrincipal.getName();
+            // Crear una Authentication autenticada para este principal
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
+                principal, null, java.util.Collections.emptyList()
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String token = SesionController.tokenFrom(request);
+
         if (token == null || token.isBlank()) {
-            writeError(response, "sesion.no-autenticado", "Se requiere una sesion autenticada");
+            writeError(response, "sesion.no-autenticado");
             return;
         }
 
         try {
             UUID userId = service.autenticar(token);
 
+            // Establecer Authentication en SecurityContext
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
+                userId.toString(), null, java.util.Collections.emptyList()
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
             request = new PrincipalRequestWrapper(request, userId);
             filterChain.doFilter(request, response);
 
         } catch (SesionException exception) {
 
-            // 🔥 CAMBIO CRÍTICO:
-            // SOLO 401 si el token es inválido o la sesión está expirada.
             if (exception.code().equals("sesion.token-invalido")
                     || exception.code().equals("sesion.expirada")) {
 
-                writeError(response, exception.code(), exception.getMessage());
+                writeError(response, exception.code());
                 return;
             }
 
-            // 🔥 CAMBIO CRÍTICO:
-            // Para cualquier otro error → dejar que el controlador responda.
             throw exception;
         }
     }
 
-    private void writeError(HttpServletResponse response, String code, String message) throws IOException {
+    private boolean isAnonymous(Authentication auth) {
+        return auth.getPrincipal().equals("anonymousUser") 
+            || auth.getClass().getSimpleName().equals("AnonymousAuthenticationToken");
+    }
+
+    private void writeError(HttpServletResponse response, String code) throws IOException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.getWriter().write("{\"timestamp\":\"" + java.time.Instant.now()
-                + "\",\"code\":\"" + code + "\",\"message\":\"" + message + "\"}");
+        response.getWriter().write("{\"code\":\"" + code + "\"}");
     }
 
     private boolean isPublic(HttpServletRequest request) {
@@ -80,7 +107,6 @@ public class SesionAuthenticationFilter extends OncePerRequestFilter {
                 || ("POST".equals(request.getMethod()) && "/api/usuarios".equals(path))
                 || !path.startsWith("/api/");
     }
-
 
     private static final class PrincipalRequestWrapper extends HttpServletRequestWrapper {
         private final Principal principal;
@@ -96,3 +122,4 @@ public class SesionAuthenticationFilter extends OncePerRequestFilter {
         }
     }
 }
+

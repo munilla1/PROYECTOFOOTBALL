@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 import static com.example.football.sesiones.presentation.SesionDtos.LoginRequest;
 import static com.example.football.sesiones.presentation.SesionDtos.LoginResponse;
 
@@ -38,7 +40,10 @@ public class SesionController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response, Principal principal) {
+        if (principal == null) {
+            throw new com.example.football.usuario.presentation.UnauthorizedException();
+        }
         service.logout(tokenFrom(request));
         response.addHeader("Set-Cookie", sessionCookie("", 0).toString());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

@@ -58,6 +58,10 @@ public class SesionJpaEntity {
     public Instant getUltimaActividad() { return ultimaActividad; }
     public EstadoSesion getEstado() { return estado; }
 
+    public void setEstado(EstadoSesion estado) {
+        this.estado = estado;
+    }
+
     public void marcarExpirada() {
         this.estado = EstadoSesion.EXPIRADA;
     }

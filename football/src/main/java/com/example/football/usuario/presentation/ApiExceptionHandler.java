@@ -2,6 +2,8 @@ package com.example.football.usuario.presentation;
 
 import com.example.football.usuario.application.EmailDuplicadoException;
 import com.example.football.usuario.application.UsuarioNotFoundException;
+import com.example.football.usuario.presentation.UnauthorizedException;
+import com.example.football.usuario.presentation.ForbiddenException;
 import com.example.football.sesiones.application.SesionException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -10,49 +12,57 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.Instant;
+import java.util.Map;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
+
     @ExceptionHandler(EmailDuplicadoException.class)
-    public ResponseEntity<ApiError> emailDuplicado(EmailDuplicadoException exception) {
-        return response(HttpStatus.CONFLICT, "usuario.email-duplicado", exception.getMessage());
+    public ResponseEntity<?> emailDuplicado(EmailDuplicadoException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Map.of("code", "usuario.email-duplicado"));
     }
 
     @ExceptionHandler(UsuarioNotFoundException.class)
-    public ResponseEntity<ApiError> usuarioNoEncontrado(UsuarioNotFoundException exception) {
-        return response(HttpStatus.NOT_FOUND, "usuario.progreso-no-encontrado", exception.getMessage());
+    public ResponseEntity<?> usuarioNoEncontrado(UsuarioNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of("code", "usuario.progreso-no-encontrado"));
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    public ResponseEntity<ApiError> noAutorizado(UnauthorizedException exception) {
-        return response(HttpStatus.UNAUTHORIZED, "sesion.no-autenticado", exception.getMessage());
+    public ResponseEntity<?> noAutorizado(UnauthorizedException exception) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("code", "sesion.no-autenticado"));
     }
 
     @ExceptionHandler(SesionException.class)
-    public ResponseEntity<ApiError> sesion(SesionException exception) {
+    public ResponseEntity<?> sesion(SesionException exception) {
+
         if ("sesion.datos-invalidos".equals(exception.code())) {
-            return response(HttpStatus.BAD_REQUEST, exception.code(), exception.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("code", exception.code()));
         }
+
         if ("usuario.no-existe".equals(exception.code())) {
-            return response(HttpStatus.NOT_FOUND, exception.code(), exception.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("code", exception.code()));
         }
-        return response(HttpStatus.UNAUTHORIZED, exception.code(), exception.getMessage());
+
+        return ResponseEntity.status(exception.status())
+                .body(Map.of("code", exception.code()));
     }
 
     @ExceptionHandler(ForbiddenException.class)
-    public ResponseEntity<ApiError> prohibido(ForbiddenException exception) {
-        return response(HttpStatus.FORBIDDEN, "usuario.no-autorizado", exception.getMessage());
+    public ResponseEntity<?> prohibido(ForbiddenException exception) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(Map.of("code", "usuario.no-autorizado"));
     }
 
-    @ExceptionHandler({IllegalArgumentException.class, DataIntegrityViolationException.class})
-    public ResponseEntity<ApiError> solicitudInvalida(RuntimeException exception) {
-        return response(HttpStatus.BAD_REQUEST, "usuario.datos-invalidos", exception.getMessage());
-    }
-
-    private ResponseEntity<ApiError> response(HttpStatus status, String code, String message) {
-        return ResponseEntity.status(status).body(new ApiError(Instant.now(), code, message));
-    }
-
-    public record ApiError(Instant timestamp, String code, String message) {
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> argumentoInvalido(IllegalArgumentException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Map.of("code", "usuario.datos-invalidos"));
     }
 }
+
+
