@@ -31,8 +31,9 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<UsuarioResponse> registrar(@RequestBody RegistroRequest request) {
+        var usuario = service.registrar(request.nombre(), request.email(), request.password());
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(UsuarioResponse.from(service.registrar(request.nombre(), request.email(), request.password())));
+                .body(UsuarioResponse.from(usuario));
     }
 
     @GetMapping("/me")
@@ -77,3 +78,4 @@ public class UsuarioController {
         }
     }
 }
+

@@ -104,4 +104,12 @@ public class UsuarioJpaEntity {
     public EstadoJugador getEstadoJugador() { return estadoJugador; }
     public String getEstadisticasAcumuladas() { return estadisticasAcumuladas; }
     public String getHistorialPartidos() { return historialPartidos; }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public void setActualizadoEn(Instant actualizadoEn) {
+        this.actualizadoEn = actualizadoEn;
+    }
 }

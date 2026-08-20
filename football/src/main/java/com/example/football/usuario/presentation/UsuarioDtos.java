@@ -32,4 +32,26 @@ public final class UsuarioDtos {
                     progreso.estado(), progreso.estadisticasAcumuladas(), progreso.historialPartidos());
         }
     }
+
+    public record CambiarRolRequest(String newRole) {
+    }
+
+    public record UsuarioListResponse(UUID id, String nombre, String email, Rol rol, Instant fechaCreacion) {
+        public static UsuarioListResponse from(Usuario usuario) {
+            return new UsuarioListResponse(usuario.id(), usuario.nombre(), usuario.email(), usuario.rol(), usuario.fechaCreacion());
+        }
+    }
+
+    public record ConfigRequest(String clave, String valor, String tipo) {
+    }
+
+    public record ConfigResponse(String mensaje) {
+    }
+
+    public record LogResponse(Instant timestamp, String nivel, String mensaje) {
+    }
+
+    public record ErrorResponse(Instant timestamp, String tipo, String mensaje, String stackTrace, UUID usuarioAfectado) {
+    }
 }
+

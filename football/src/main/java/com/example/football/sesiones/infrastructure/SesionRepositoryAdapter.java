@@ -1,9 +1,11 @@
 package com.example.football.sesiones.infrastructure;
 
 import com.example.football.sesiones.application.SesionRepository;
+import com.example.football.sesiones.domain.EstadoSesion;
 import com.example.football.sesiones.domain.SesionUsuario;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,6 +30,21 @@ public class SesionRepositoryAdapter implements SesionRepository {
     @Override
     public Optional<SesionUsuario> findByTokenHash(String tokenHash) {
         return repository.findByTokenHash(tokenHash).map(this::toDomain);
+    }
+
+    @Override
+    public List<SesionUsuario> findByUsuarioId(UUID usuarioId) {
+        return repository.findByUsuarioId(usuarioId).stream()
+                .map(this::toDomain)
+                .toList();
+    }
+
+    @Override
+    public void invalidar(UUID sesionId) {
+        repository.findById(sesionId).ifPresent(entity -> {
+            entity.setEstado(EstadoSesion.EXPIRADA);
+            repository.save(entity);
+        });
     }
 
     private SesionJpaEntity toEntity(SesionUsuario sesion) {

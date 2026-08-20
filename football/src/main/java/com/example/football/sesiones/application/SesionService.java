@@ -7,6 +7,7 @@ import com.example.football.usuario.application.PasswordHasher;
 import com.example.football.usuario.application.UsuarioRepository;
 import com.example.football.usuario.domain.Usuario;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,10 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SesionService {
@@ -36,29 +41,25 @@ public class SesionService {
         this.inactividadMaxima = inactividadMaxima;
     }
 
-    // ------------------------------------------------------------
-    // LOGIN
-    // ------------------------------------------------------------
     @Transactional
     public LoginResult login(String email, String password) {
 
-        // 🔴 CORRECCIÓN 1: datos vacíos → 400 sesion.datos-invalidos
         if (email == null || email.isBlank() || password == null || password.isBlank()) {
-            throw new SesionException("sesion.datos-invalidos", "El email y la contraseña son obligatorios");
+            throw new SesionException("sesion.datos-invalidos", HttpStatus.BAD_REQUEST);
         }
 
         if (!email.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")) {
-            throw new SesionException("sesion.datos-invalidos", "El email no es valido");
+            throw new SesionException("sesion.datos-invalidos", HttpStatus.BAD_REQUEST);
         }
 
         Optional<Usuario> usuario = usuarioRepository.findByEmail(email.trim().toLowerCase());
 
         if (usuario.isEmpty()) {
-            throw new SesionException("usuario.no-existe", "El usuario no existe");
+            throw new SesionException("usuario.no-existe", HttpStatus.NOT_FOUND);
         }
 
         if (!passwordHasher.matches(password, usuario.get().passwordHash())) {
-            throw new SesionException("sesion.credenciales-invalidas", "Las credenciales no son validas");
+            throw new SesionException("sesion.credenciales-invalidas", HttpStatus.UNAUTHORIZED);
         }
 
         Instant ahora = Instant.now();
@@ -80,9 +81,6 @@ public class SesionService {
         return new LoginResult(token, expiracion, usuario.get().id());
     }
 
-    // ------------------------------------------------------------
-    // LOGOUT
-    // ------------------------------------------------------------
     @Transactional
     public void logout(String token) {
         if (token == null || token.isBlank()) {
@@ -93,9 +91,6 @@ public class SesionService {
                 .ifPresent(s -> sesionRepository.save(s.cerrada()));
     }
 
-    // ------------------------------------------------------------
-    // AUTENTICAR (middleware)
-    // ------------------------------------------------------------
     @Transactional(noRollbackFor = SesionException.class)
     public UUID autenticar(String token) {
 
@@ -103,32 +98,28 @@ public class SesionService {
         try {
             datos = tokenService.parseAndVerify(token);
         } catch (IllegalArgumentException exception) {
-            throw new SesionException("sesion.token-invalido", "El token no es valido");
+            throw new SesionException("sesion.token-invalido", HttpStatus.UNAUTHORIZED);
         }
 
         SesionUsuario sesion = sesionRepository.findById(datos.sessionId())
-                .orElseThrow(() -> new SesionException("sesion.token-invalido", "El token no es valido"));
+                .orElseThrow(() -> new SesionException("sesion.token-invalido", HttpStatus.UNAUTHORIZED));
 
         Instant ahora = Instant.now();
 
-        // 🔴 CORRECCIÓN 3: si no está ACTIVA → token inválido
         if (sesion.estado() != EstadoSesion.ACTIVA) {
-            throw new SesionException("sesion.token-invalido", "El token no es valido");
+            throw new SesionException("sesion.token-invalido", HttpStatus.UNAUTHORIZED);
         }
 
-        // 🔴 CORRECCIÓN 4: expiración por inactividad → persistir EXPIRADA
         if (!sesion.estaActiva(ahora, inactividadMaxima)) {
-            sesionRepository.save(sesion.expirada());   // ← aquí se persiste EXPIRADA
-            throw new SesionException("sesion.expirada", "La sesion ha expirado");
+            sesionRepository.save(sesion.expirada());
+            throw new SesionException("sesion.expirada", HttpStatus.UNAUTHORIZED);
         }
 
-        // 🔴 CORRECCIÓN 5: token manipulado
         if (!sesion.usuarioId().equals(datos.userId()) ||
             !sesion.tokenHash().equals(tokenService.hash(token))) {
-            throw new SesionException("sesion.token-invalido", "El token no es valido");
+            throw new SesionException("sesion.token-invalido", HttpStatus.UNAUTHORIZED);
         }
 
-        // 🔴 CORRECCIÓN 6: registrar actividad y persistir
         sesionRepository.save(sesion.conActividad(ahora));
 
         return sesion.usuarioId();
@@ -136,4 +127,3 @@ public class SesionService {
 
     public record LoginResult(String token, Instant expiresAt, UUID userId) {}
 }
-
