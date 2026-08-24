@@ -3,6 +3,7 @@ package com.example.football;
 import com.example.football.usuario.domain.RoleValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * Configuración de beans de dominio para inyección de dependencias.
@@ -28,5 +29,17 @@ public class DomainBeansConfiguration {
     @Bean
     public RoleValidator roleValidator() {
         return new RoleValidator();
+    }
+
+    /**
+     * Expone RestTemplate como un bean de Spring para inyección en adaptadores HTTP.
+     * 
+     * RestTemplate se utiliza en ApiFootballClientAdapter para consumir API-Football.
+     * 
+     * @return RestTemplate configurado
+     */
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }

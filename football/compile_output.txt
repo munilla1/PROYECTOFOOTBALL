@@ -1,0 +1,69 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< com.example:football >------------------------
+[INFO] Building football 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ football ---
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] Copying 20 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ football ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ football ---
+[INFO] skip non existing resourceDirectory c:\Users\mucho\Desktop\ProyectoFootball\football\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ football ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 7 source files with javac [debug parameters release 21] to target\test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /c:/Users/mucho/Desktop/ProyectoFootball/football/src/test/acceptance/java/com/example/football/estadisticas/acceptance/RF0002_StatsMapperAcceptanceTest.java:[112,20] cannot find symbol
+  symbol:   variable emptyStats
+  location: class com.example.football.estadisticas.acceptance.RF0002_StatsMapperAcceptanceTest
+[ERROR] /c:/Users/mucho/Desktop/ProyectoFootball/football/src/test/acceptance/java/com/example/football/estadisticas/acceptance/RF0002_StatsMapperAcceptanceTest.java:[113,20] cannot find symbol
+  symbol:   variable emptyStats
+  location: class com.example.football.estadisticas.acceptance.RF0002_StatsMapperAcceptanceTest
+[ERROR] /c:/Users/mucho/Desktop/ProyectoFootball/football/src/test/acceptance/java/com/example/football/estadisticas/acceptance/RF0002_StatsMapperAcceptanceTest.java:[114,20] cannot find symbol
+  symbol:   variable emptyStats
+  location: class com.example.football.estadisticas.acceptance.RF0002_StatsMapperAcceptanceTest
+[ERROR] /c:/Users/mucho/Desktop/ProyectoFootball/football/src/test/acceptance/java/com/example/football/estadisticas/acceptance/RF0002_StatsMapperAcceptanceTest.java:[115,20] cannot find symbol
+  symbol:   variable emptyStats
+  location: class com.example.football.estadisticas.acceptance.RF0002_StatsMapperAcceptanceTest
+[ERROR] /c:/Users/mucho/Desktop/ProyectoFootball/football/src/test/acceptance/java/com/example/football/estadisticas/acceptance/RF0002_StatsMapperAcceptanceTest.java:[116,20] cannot find symbol
+  symbol:   variable emptyStats
+  location: class com.example.football.estadisticas.acceptance.RF0002_StatsMapperAcceptanceTest
+[INFO] 5 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.530 s
+[INFO] Finished at: 2026-08-24T17:53:20+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.15.0:testCompile (default-testCompile) on project football: Compilation failure: Compilation failure: 
+[ERROR] /c:/Users/mucho/Desktop/ProyectoFootball/football/src/test/acceptance/java/com/example/football/estadisticas/acceptance/RF0002_StatsMapperAcceptanceTest.java:[112,20] cannot find symbol
+[ERROR]   symbol:   variable emptyStats
+[ERROR]   location: class com.example.football.estadisticas.acceptance.RF0002_StatsMapperAcceptanceTest
+[ERROR] /c:/Users/mucho/Desktop/ProyectoFootball/football/src/test/acceptance/java/com/example/football/estadisticas/acceptance/RF0002_StatsMapperAcceptanceTest.java:[113,20] cannot find symbol
+[ERROR]   symbol:   variable emptyStats
+[ERROR]   location: class com.example.football.estadisticas.acceptance.RF0002_StatsMapperAcceptanceTest
+[ERROR] /c:/Users/mucho/Desktop/ProyectoFootball/football/src/test/acceptance/java/com/example/football/estadisticas/acceptance/RF0002_StatsMapperAcceptanceTest.java:[114,20] cannot find symbol
+[ERROR]   symbol:   variable emptyStats
+[ERROR]   location: class com.example.football.estadisticas.acceptance.RF0002_StatsMapperAcceptanceTest
+[ERROR] /c:/Users/mucho/Desktop/ProyectoFootball/football/src/test/acceptance/java/com/example/football/estadisticas/acceptance/RF0002_StatsMapperAcceptanceTest.java:[115,20] cannot find symbol
+[ERROR]   symbol:   variable emptyStats
+[ERROR]   location: class com.example.football.estadisticas.acceptance.RF0002_StatsMapperAcceptanceTest
+[ERROR] /c:/Users/mucho/Desktop/ProyectoFootball/football/src/test/acceptance/java/com/example/football/estadisticas/acceptance/RF0002_StatsMapperAcceptanceTest.java:[116,20] cannot find symbol
+[ERROR]   symbol:   variable emptyStats
+[ERROR]   location: class com.example.football.estadisticas.acceptance.RF0002_StatsMapperAcceptanceTest
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

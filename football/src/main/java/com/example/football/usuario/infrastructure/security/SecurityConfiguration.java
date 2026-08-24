@@ -30,18 +30,6 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        boolean isDev = Arrays.asList(environment.getActiveProfiles()).contains("dev");
-        
-        if (isDev) {
-            http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(authz -> authz.anyRequest().permitAll())
-                .headers(headers -> headers.disable())
-                .httpBasic(httpBasic -> httpBasic.disable())
-                .formLogin(form -> form.disable());
-
-            return http.build();
-        }
 
         http
             .csrf(csrf -> csrf.disable())
@@ -73,4 +61,5 @@ public class SecurityConfiguration {
 
         return http.build();
     }
+
 }
